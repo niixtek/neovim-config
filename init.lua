@@ -20,11 +20,13 @@ vim.api.nvim_exec(
 local use = require('packer').use
 require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
+	use 'neovim/nvim-lspconfig' -- LSP
+	use 'romgrk/barbar.nvim'
   use 'karb94/neoscroll.nvim' -- SmoothScroll
 	use 'mattn/emmet-vim' -- Emmet
 	use { 'NTBBloodbath/rest.nvim', requires = { 'nvim-lua/plenary.nvim' } } 
   use 'tpope/vim-fugitive' -- Git Command 
-	--  use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
+  use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
   use({ 'rose-pine/neovim', as = 'rose-pine' }) --Theme
 	use 'kyazdani42/nvim-web-devicons'
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } } -- Telescope Manage Files Search
@@ -75,12 +77,20 @@ vim.cmd [[colorscheme rose-pine ]]
 vim.g.rose_pine_variant = 'moon'
 vim.g.rose_pine_enable_italics = true
 
---Set statusbar
+	--Set statusbar
 vim.g.lightline = {
 --  colorscheme = 'rose-pine',
   active = { left = { { 'mode', 'paste' }, { 'gitbranch', 'readonly', 'filename', 'modified' } } },
   component_function = { gitbranch = 'fugitive#head' },
 }
+
+-- Barbar Config
+vim.api.nvim_set_keymap('n', '<A-,>', ':BufferPrevious<CR>', { silent = true})
+vim.api.nvim_set_keymap('n', '<A-.>', ':BufferNext<CR>', { silent = true})
+vim.api.nvim_set_keymap('n', '<A-<>', ':BufferMovePrevious<CR>', { silent = true})
+vim.api.nvim_set_keymap('n', '<A->>', ':BufferMoveNext<CR>', { silent = true})
+vim.api.nvim_set_keymap('n', '<A-c>', ':BufferClose<CR>', { silent = true})
+vim.api.nvim_set_keymap('n', '<A-s>', ':BufferPick<CR>', { silent = true})
 
 -- NeoScroll
 require('neoscroll').setup()
@@ -95,6 +105,5 @@ require('neoscroll').setup()
 
 --Rest Tool
 require('rest-nvim').setup()
-
 -- Emmet
 vim.g["user_emmet_leader_key"] = ','
