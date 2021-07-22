@@ -21,22 +21,30 @@ local use = require('packer').use
 require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
 	use 'neovim/nvim-lspconfig' -- LSP
-	use 'romgrk/barbar.nvim'
+	use 'crispgm/nvim-tabline' -- Buffer Manage
+	use 'akinsho/nvim-bufferline.lua'
   use 'karb94/neoscroll.nvim' -- SmoothScroll
 	use 'Xuyuanp/scrollbar.nvim' --Scrollbar
-	use {'edluffy/specs.nvim'} -- Show Cursor when jumping 
+	use 'edluffy/specs.nvim' -- Show Cursor when jumping 
+	use 'famiu/nvim-reload' -- Reload Lua Plugins
 	use 'mattn/emmet-vim' -- Emmet
+	use 'kyazdani42/nvim-tree.lua' -- File Browser
 	use { 'NTBBloodbath/rest.nvim', requires = { 'nvim-lua/plenary.nvim' } } 
   use 'tpope/vim-fugitive' -- Git Command 
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
 	use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-  use({ 'rose-pine/neovim', as = 'rose-pine' }) --Theme
 	use 'kyazdani42/nvim-web-devicons'
+	use 'ryanoasis/vim-devicons'
+	use 'yamatsum/nvim-nonicons'
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } } -- Telescope Manage Files Search
-	use 'hoob3rt/lualine.nvim' --lualine
-  use 'itchyny/lightline.vim' -- Fancier statusline
+	use 'windwp/windline.nvim' -- Status bar
   use 'hrsh7th/nvim-compe' -- Autocompletion plugin
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
+	use 'norcalli/nvim-colorizer.lua'
+	-- Themes;
+  use({ 'rose-pine/neovim', as = 'rose-pine' }) 
+	use 'folke/tokyonight.nvim'
+	use 'NLKNguyen/papercolor-theme'
 end)
 
 -- Vim Options
@@ -64,28 +72,57 @@ vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Icons
+require'nvim-web-devicons'.has_loaded()
+require'nvim-web-devicons'.get_icons()
+
 -- Theme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme rose-pine ]]
---require('rose-pine').set()
-vim.g.rose_pine_variant = 'moon'
-vim.g.rose_pine_enable_italics = true
+vim.cmd [[colorscheme tokyonight]]
+vim.g.tokyonight_style = 'day'
+--vim.g.rose_pine_variant = 'moon'
+--vim.g.rose_pine_enable_italics = true
 
---lua line
-require('lualine').setup()
-options = {theme = 'rose-pine'}
+-- Colorizer
+require'colorizer'.setup()
 
--- Barbar Config
-vim.g.bufferline = {closable = false}
-vim.api.nvim_set_keymap('n', '<A-,>', ':BufferPrevious<CR>', { silent = true})
-vim.api.nvim_set_keymap('n', '<A-.>', ':BufferNext<CR>', { silent = true})
-vim.api.nvim_set_keymap('n', '<A-<>', ':BufferMovePrevious<CR>', { silent = true})
-vim.api.nvim_set_keymap('n', '<A->>', ':BufferMoveNext<CR>', { silent = true})
-vim.api.nvim_set_keymap('n', '<A-c>', ':BufferClose<CR>', { silent = true})
-vim.api.nvim_set_keymap('n', '<A-s>', ':BufferPick<CR>', { silent = true})
+-- Status Bar
+--require('wlsample.airline')
+require('wlsample.bubble')
+
+-- Tabline Config
+require("bufferline").setup{
+	options = {
+		separator_style = 'slant'
+	}
+}
+vim.api.nvim_set_keymap('n', '<A-.>', ':BufferLineCycleNext<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<A-,>', ':BufferLineCyclePrev<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<A-c>', ':BufferClose<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<A-s>', ':BufferLinePick<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<A->>', ':BufferLineMoveNext<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<A-<>', ':BufferLineMovePrev<CR>', { silent = true })
+--vim.api.nvim_set_keymap('n', '<A-q>', ':bdelete<CR>', { silent = true })
+--
+--vim.api.nvim_set_keymap('n', '<A-,>', [[<cmd>lua require("nvim-smartbufs").goto_next_buffer()<CR>]], { silent = true })
+--vim.api.nvim_set_keymap('n', '<A-.>', [[<cmd>lua require("nvim-smartbufs").goto_prev_buffer()<CR>]], { silent = true })
+--vim.api.nvim_set_keymap('n', '<A-q>', [[<cmd>lua require("nvim-smartbufs").close_current_buffer()<CR>]], { silent = true })
 
 -- NeoScroll
 require('neoscroll').setup()
+
+--File Brwose
+vim.g.nvim_tree_tab_open = 1
+vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache'}
+vim.g.nvim_tree_show_icons = {
+	git= 1,
+	folders= 0,
+	files= 0,
+	folder_arrows= 0,
+}
+vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>r', ':NvimTreeRefresh<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeFindFile<CR>', { silent = true })
 
 -- ScrollBar
 vim.api.nvim_exec(
