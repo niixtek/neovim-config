@@ -33,6 +33,7 @@ require('packer').startup(function()
   use({ 'rose-pine/neovim', as = 'rose-pine' }) --Theme
 	use 'kyazdani42/nvim-web-devicons'
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } } -- Telescope Manage Files Search
+	use 'hoob3rt/lualine.nvim' --lualine
   use 'itchyny/lightline.vim' -- Fancier statusline
   use 'hrsh7th/nvim-compe' -- Autocompletion plugin
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
@@ -70,12 +71,9 @@ vim.cmd [[colorscheme rose-pine ]]
 vim.g.rose_pine_variant = 'moon'
 vim.g.rose_pine_enable_italics = true
 
--- Set statusbar
-vim.g.lightline = {
---  colorscheme = 'rose-pine',
-  active = { left = { { 'mode', 'paste' }, { 'gitbranch', 'readonly', 'filename', 'modified' } } },
-  component_function = { gitbranch = 'fugitive#head' },
-}
+--lua line
+require('lualine').setup()
+options = {theme = 'rose-pine'}
 
 -- Barbar Config
 vim.g.bufferline = {closable = false}
