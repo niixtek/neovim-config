@@ -21,7 +21,7 @@ local use = require('packer').use
 require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
 	use 'neovim/nvim-lspconfig' -- LSP
-	use 'crispgm/nvim-tabline' -- Buffer Manage
+	use 'nvim-treesitter/nvim-treesitter'
 	use 'akinsho/nvim-bufferline.lua'
   use 'karb94/neoscroll.nvim' -- SmoothScroll
 	use 'dstein64/nvim-scrollview' --Scrollbar
@@ -33,6 +33,8 @@ require('packer').startup(function()
   use 'tpope/vim-fugitive' -- Git Command 
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
 	use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+	use 'windwp/nvim-spectre' -- Search Tool
+	-- Icons
 	use 'kyazdani42/nvim-web-devicons'
 	use 'ryanoasis/vim-devicons'
 	use 'yamatsum/nvim-nonicons'
@@ -40,6 +42,7 @@ require('packer').startup(function()
 	use 'windwp/windline.nvim' -- Status bar
   use 'hrsh7th/nvim-compe' -- Autocompletion plugin
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
+	use 'p00f/nvim-ts-rainbow' -- Raintbow Parentheses
 	use 'norcalli/nvim-colorizer.lua'
 	-- Themes;
   use({ 'rose-pine/neovim', as = 'rose-pine' }) 
@@ -253,5 +256,18 @@ require('gitsigns').setup {
 
 --Rest Tool
 require('rest-nvim').setup()
+vim.api.nvim_set_keymap('n', '<leader>rr', [[<cmd>lua require('rest-nvim').run()<CR>]], { noremap = true, silent = true })
+
 -- Emmet
 vim.g["user_emmet_leader_key"] = ','
+
+-- Raintbow Parentheses
+-- require'nvim-treesitter.configs'.setup {
+--   rainbow = {
+--     enable = true,
+--     extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+--     max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
+--     colors = {}, -- table of hex strings
+--     termcolors = {} -- table of colour name strings
+--   }
+-- }
