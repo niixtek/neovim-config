@@ -24,7 +24,7 @@ require('packer').startup(function()
 	use 'crispgm/nvim-tabline' -- Buffer Manage
 	use 'akinsho/nvim-bufferline.lua'
   use 'karb94/neoscroll.nvim' -- SmoothScroll
-	use 'Xuyuanp/scrollbar.nvim' --Scrollbar
+	use 'dstein64/nvim-scrollview' --Scrollbar
 	use 'edluffy/specs.nvim' -- Show Cursor when jumping 
 	use 'famiu/nvim-reload' -- Reload Lua Plugins
 	use 'mattn/emmet-vim' -- Emmet
@@ -107,9 +107,6 @@ vim.api.nvim_set_keymap('n', '<A-<>', ':BufferLineMovePrev<CR>', { silent = true
 --vim.api.nvim_set_keymap('n', '<A-,>', [[<cmd>lua require("nvim-smartbufs").goto_next_buffer()<CR>]], { silent = true })
 --vim.api.nvim_set_keymap('n', '<A-.>', [[<cmd>lua require("nvim-smartbufs").goto_prev_buffer()<CR>]], { silent = true })
 --vim.api.nvim_set_keymap('n', '<A-q>', [[<cmd>lua require("nvim-smartbufs").close_current_buffer()<CR>]], { silent = true })
-
--- NeoScroll
-require('neoscroll').setup()
 
 --File Brwose
 vim.g.nvim_tree_tab_open = 1
