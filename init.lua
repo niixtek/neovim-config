@@ -22,18 +22,21 @@ require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
 	use 'neovim/nvim-lspconfig' -- LSP
 	use 'nvim-treesitter/nvim-treesitter'
-	use 'akinsho/nvim-bufferline.lua'
+	use 'akinsho/nvim-bufferline.lua' -- Buffer Tab
+	use "lukas-reineke/indent-blankline.nvim" -- Indent Line
   use 'karb94/neoscroll.nvim' -- SmoothScroll
 	use 'dstein64/nvim-scrollview' --Scrollbar
 	use 'edluffy/specs.nvim' -- Show Cursor when jumping 
 	use 'famiu/nvim-reload' -- Reload Lua Plugins
 	use 'mattn/emmet-vim' -- Emmet
+	use 'mhartington/formatter.nvim' -- Formatter
 	use 'kyazdani42/nvim-tree.lua' -- File Browser
 	use { 'NTBBloodbath/rest.nvim', requires = { 'nvim-lua/plenary.nvim' } } 
   use 'tpope/vim-fugitive' -- Git Command 
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
 	use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 	use 'windwp/nvim-spectre' -- Search Tool
+	use 'gennaro-tedesco/nvim-commaround' -- Comment 
 	-- Icons
 	use 'kyazdani42/nvim-web-devicons'
 	use 'ryanoasis/vim-devicons'
@@ -70,6 +73,9 @@ vim.wo.number = true
 vim.wo.cursorline = true
 --vim.cmd [[set undofile]]
 
+--Smooth Scroll
+require('neoscroll').setup()
+
 --Remap space as leader key
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
@@ -90,7 +96,6 @@ vim.g.tokyonight_style = 'day'
 require'colorizer'.setup()
 
 -- Status Bar
---require('wlsample.airline')
 require('wlsample.bubble')
 
 -- Tabline Config
@@ -259,7 +264,8 @@ require('rest-nvim').setup()
 vim.api.nvim_set_keymap('n', '<leader>rr', [[<cmd>lua require('rest-nvim').run()<CR>]], { noremap = true, silent = true })
 
 -- Emmet
-vim.g["user_emmet_leader_key"] = ','
+vim.g.user_emmet_mode = 'i'
+vim.g.user_emmet_leader_key = ','
 
 -- Raintbow Parentheses
 -- require'nvim-treesitter.configs'.setup {
@@ -271,3 +277,55 @@ vim.g["user_emmet_leader_key"] = ','
 --     termcolors = {} -- table of colour name strings
 --   }
 -- }
+
+-- nvim-commaround
+vim.api.nvim_set_keymap('v', '<leader>c', '<Plug>ToggleCommaround', {})
+
+-- Formatter
+require('formatter').setup({
+  logging = false,
+  filetype = {
+    javascript = {
+        -- prettier
+       function()
+          return {
+            exe = "prettier",
+            args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0), '--single-quote'},
+            stdin = true
+          }
+        end
+    },
+    rust = {
+      -- Rustfmt
+      function()
+        return {
+          exe = "rustfmt",
+          args = {"--emit=stdout"},
+          stdin = true
+        }
+      end
+    },
+    lua = {
+        -- luafmt
+        function()
+          return {
+            exe = "luafmt",
+            args = {"--indent-count", 2, "--stdin"},
+            stdin = true
+          }
+        end
+    },
+    cpp = {
+        -- clang-format
+       function()
+          return {
+            exe = "clang-format",
+            args = {},
+            stdin = true,
+            cwd = vim.fn.expand('%:p:h')  -- Run clang-format in cwd of the file.
+          }
+        end
+    }
+  }
+})
+vim.api.nvim_set_keymap('n', '<leader>f', ':Format<CR>', { silent = true })
