@@ -51,6 +51,8 @@ require('packer').startup(function()
   use({ 'rose-pine/neovim', as = 'rose-pine' }) 
 	use 'folke/tokyonight.nvim'
 	use 'NLKNguyen/papercolor-theme'
+	use {'kyazdani42/nvim-tree.lua', tags="1.3.7"}-- File Browser
+	use 'shaunsingh/moonlight.nvim'
 end)
 
 -- Vim Options
@@ -87,8 +89,8 @@ require'nvim-web-devicons'.get_icons()
 
 -- Theme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme tokyonight]]
-vim.g.tokyonight_style = 'dawn'
+vim.cmd [[colorscheme moonlight]]
+--vim.g.tokyonight_style = 'storm'
 --vim.g.rose_pine_variant = 'moon'
 --vim.g.rose_pine_enable_italics = true
 
