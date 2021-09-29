@@ -123,9 +123,9 @@ vim.g.nvim_tree_tab_open = 1
 vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache'}
 vim.g.nvim_tree_show_icons = {
 	git= 1,
-	folders= 0,
-	files= 0,
-	folder_arrows= 0,
+	folders= 1,
+	files= 1,
+	folder_arrows= 1,
 }
 vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>r', ':NvimTreeRefresh<CR>', { silent = true })
