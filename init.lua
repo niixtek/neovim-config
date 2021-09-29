@@ -30,7 +30,7 @@ require('packer').startup(function()
 	use 'famiu/nvim-reload' -- Reload Lua Plugins
 	use 'mattn/emmet-vim' -- Emmet
 	use 'mhartington/formatter.nvim' -- Formatter
-	use 'kyazdani42/nvim-tree.lua' -- File Browser
+	use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', config = function() require'nvim-tree'.setup {} end}
 	use { 'NTBBloodbath/rest.nvim', requires = { 'nvim-lua/plenary.nvim' } } 
   use 'tpope/vim-fugitive' -- Git Command 
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
@@ -88,7 +88,7 @@ require'nvim-web-devicons'.get_icons()
 -- Theme
 vim.o.termguicolors = true
 vim.cmd [[colorscheme tokyonight]]
-vim.g.tokyonight_style = 'day'
+vim.g.tokyonight_style = 'dawn'
 --vim.g.rose_pine_variant = 'moon'
 --vim.g.rose_pine_enable_italics = true
 
@@ -116,7 +116,7 @@ vim.api.nvim_set_keymap('n', '<A-<>', ':BufferLineMovePrev<CR>', { silent = true
 --vim.api.nvim_set_keymap('n', '<A-.>', [[<cmd>lua require("nvim-smartbufs").goto_prev_buffer()<CR>]], { silent = true })
 --vim.api.nvim_set_keymap('n', '<A-q>', [[<cmd>lua require("nvim-smartbufs").close_current_buffer()<CR>]], { silent = true })
 
---File Brwose
+--File Browser
 vim.g.nvim_tree_tab_open = 1
 vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache'}
 vim.g.nvim_tree_show_icons = {
