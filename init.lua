@@ -118,7 +118,6 @@ vim.api.nvim_set_keymap('n', '<A-<>', ':BufferLineMovePrev<CR>', { silent = true
 --vim.api.nvim_set_keymap('n', '<A-q>', [[<cmd>lua require("nvim-smartbufs").close_current_buffer()<CR>]], { silent = true })
 
 --File Browser
---vim.g.nvim_tree_tab_open = 1
 vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache'}
 vim.g.nvim_tree_show_icons = {
 	git= 1,
