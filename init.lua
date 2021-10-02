@@ -52,6 +52,7 @@ require('packer').startup(function()
 	use 'folke/tokyonight.nvim'
 	use 'NLKNguyen/papercolor-theme'
 	use 'shaunsingh/moonlight.nvim'
+	use 'artanikin/vim-synthwave84'
 end)
 
 -- Vim Options
@@ -88,10 +89,9 @@ require'nvim-web-devicons'.get_icons()
 
 -- Theme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme moonlight]]
---vim.g.tokyonight_style = 'storm'
---vim.g.rose_pine_variant = 'moon'
---vim.g.rose_pine_enable_italics = true
+vim.cmd('colorscheme rose-pine')
+vim.g.rose_pine_variant = 'moon'
+vim.g.rose_pine_enable_italics = true
 
 -- Colorizer
 require'colorizer'.setup()
