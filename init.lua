@@ -51,7 +51,6 @@ require('packer').startup(function()
   use({ 'rose-pine/neovim', as = 'rose-pine' }) 
 	use 'folke/tokyonight.nvim'
 	use 'NLKNguyen/papercolor-theme'
-	use {'kyazdani42/nvim-tree.lua', tags="1.3.7"}-- File Browser
 	use 'shaunsingh/moonlight.nvim'
 end)
 
@@ -119,7 +118,7 @@ vim.api.nvim_set_keymap('n', '<A-<>', ':BufferLineMovePrev<CR>', { silent = true
 --vim.api.nvim_set_keymap('n', '<A-q>', [[<cmd>lua require("nvim-smartbufs").close_current_buffer()<CR>]], { silent = true })
 
 --File Browser
-vim.g.nvim_tree_tab_open = 1
+--vim.g.nvim_tree_tab_open = 1
 vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache'}
 vim.g.nvim_tree_show_icons = {
 	git= 1,
