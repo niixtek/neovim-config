@@ -111,7 +111,7 @@ vim.api.nvim_set_keymap('n', '<A-c>', ':BufferClose<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<A-s>', ':BufferLinePick<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<A->>', ':BufferLineMoveNext<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<A-<>', ':BufferLineMovePrev<CR>', { silent = true })
-vim.api.nvim_set_keymap('n', '<A-q>', ':bdelete<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<A-w>', ':bdelete<CR>', { silent = true })
 
 --File Browser
 vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache'}
