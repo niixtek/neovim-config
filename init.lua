@@ -48,11 +48,8 @@ require('packer').startup(function()
 	use 'p00f/nvim-ts-rainbow' -- Raintbow Parentheses
 	use 'norcalli/nvim-colorizer.lua'
 	-- Themes;
-  use({ 'rose-pine/neovim', as = 'rose-pine' }) 
-	use 'folke/tokyonight.nvim'
-	use 'NLKNguyen/papercolor-theme'
+	use 'senran101604/neotrix.vim'
 	use 'shaunsingh/moonlight.nvim'
-	use 'artanikin/vim-synthwave84'
 end)
 
 -- Vim Options
@@ -88,10 +85,9 @@ require'nvim-web-devicons'.has_loaded()
 require'nvim-web-devicons'.get_icons()
 
 -- Theme
+vim.wo.t_Co = "256"
 vim.o.termguicolors = true
-vim.cmd('colorscheme rose-pine')
-vim.g.rose_pine_variant = 'moon'
-vim.g.rose_pine_enable_italics = true
+vim.cmd('colorscheme moonlight')
 
 -- Colorizer
 require'colorizer'.setup()
