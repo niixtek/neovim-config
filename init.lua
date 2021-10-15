@@ -50,6 +50,7 @@ require('packer').startup(function()
 	-- Themes;
 	use 'senran101604/neotrix.vim'
 	use 'shaunsingh/moonlight.nvim'
+	use 'Pocco81/Catppuccino.nvim'	
 end)
 
 -- Vim Options
@@ -87,8 +88,15 @@ require'nvim-web-devicons'.get_icons()
 -- Theme
 vim.wo.t_Co = "256"
 vim.o.termguicolors = true
-vim.cmd('colorscheme moonlight')
+vim.cmd('colorscheme catppuccino')
 
+local catppuccino = require("catppuccino")
+catppuccino.setup({
+  colorscheme = "neon_latte",
+	styles = {
+		comments = "italic"
+	}
+})
 -- Colorizer
 require'colorizer'.setup()
 
@@ -260,15 +268,15 @@ vim.g.user_emmet_mode = 'i'
 vim.g.user_emmet_leader_key = ','
 
 -- Raintbow Parentheses
--- require'nvim-treesitter.configs'.setup {
---   rainbow = {
---     enable = true,
---     extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
---     max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
---     colors = {}, -- table of hex strings
---     termcolors = {} -- table of colour name strings
---   }
--- }
+require'nvim-treesitter.configs'.setup {
+  rainbow = {
+    enable = true,
+    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+    max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
+    colors = {}, -- table of hex strings
+    termcolors = {} -- table of colour name strings
+  }
+}
 
 -- nvim-commaround
 vim.api.nvim_set_keymap('v', '<leader>c', '<Plug>ToggleCommaround', {})
