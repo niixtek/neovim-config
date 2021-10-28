@@ -47,6 +47,8 @@ require('packer').startup(function()
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
 	use 'p00f/nvim-ts-rainbow' -- Raintbow Parentheses
 	use 'norcalli/nvim-colorizer.lua'
+	-- remote
+	use 'chipsenkbeil/distant.nvim'
 	-- Themes;
 	use 'senran101604/neotrix.vim'
 	use 'shaunsingh/moonlight.nvim'
@@ -159,6 +161,12 @@ require('specs').setup{
     ignore_buftypes = {
         nofile = true,
     },
+}
+
+--Distant
+local actions = require('distant.nav.actions')
+require('distant').setup{
+	['*'] = require('distant.settings').chip_default(),
 }
 
 -- TeleScope
