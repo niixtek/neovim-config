@@ -50,10 +50,9 @@ require('packer').startup(function()
 	-- remote
 	use 'chipsenkbeil/distant.nvim'
 	-- Themes;
-	use 'senran101604/neotrix.vim'
+	use 'folke/tokyonight.nvim'
+	use 'NLKNguyen/papercolor-theme'
 	use 'shaunsingh/moonlight.nvim'
-	use 'catppuccin/nvim'	
-	use 'Rigellute/shades-of-purple.vim'
 end)
 
 -- Vim Options
@@ -91,7 +90,9 @@ require'nvim-web-devicons'.get_icons()
 -- Theme
 vim.wo.t_Co = "256"
 vim.o.termguicolors = true
-vim.cmd('colorscheme shades_of_purple')
+vim.o.background = 'light'
+vim.cmd('colorscheme tokyonight')
+--vim.g.tokyonight_style = 'storm'
 
 -- Colorizer
 require'colorizer'.setup()
