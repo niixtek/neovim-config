@@ -52,7 +52,7 @@ require('packer').startup(function()
 	-- Themes;
 	use 'senran101604/neotrix.vim'
 	use 'shaunsingh/moonlight.nvim'
-	use 'Pocco81/Catppuccino.nvim'	
+	use 'catppuccin/nvim'	
 end)
 
 -- Vim Options
@@ -90,9 +90,9 @@ require'nvim-web-devicons'.get_icons()
 -- Theme
 vim.wo.t_Co = "256"
 vim.o.termguicolors = true
-vim.cmd('colorscheme catppuccino')
+vim.cmd('colorscheme catppuccin')
 
-local catppuccino = require("catppuccino")
+local catppuccino = require("catppuccin")
 catppuccino.setup({
   colorscheme = "neon_latte",
 	styles = {
