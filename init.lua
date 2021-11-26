@@ -288,7 +288,7 @@ vim.api.nvim_set_keymap('v', '<leader>c', '<Plug>ToggleCommaround', {})
 require('formatter').setup({
   logging = false,
   filetype = {
-    javascript = {
+    js, html, vue = {
         -- prettier
        function()
           return {
