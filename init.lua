@@ -53,6 +53,7 @@ require('packer').startup(function()
 	use 'senran101604/neotrix.vim'
 	use 'shaunsingh/moonlight.nvim'
 	use 'catppuccin/nvim'	
+	use 'Rigellute/shades-of-purple.vim'
 end)
 
 -- Vim Options
@@ -90,15 +91,8 @@ require'nvim-web-devicons'.get_icons()
 -- Theme
 vim.wo.t_Co = "256"
 vim.o.termguicolors = true
-vim.cmd('colorscheme catppuccin')
+vim.cmd('colorscheme shades_of_purple')
 
-local catppuccino = require("catppuccin")
-catppuccino.setup({
-  colorscheme = "neon_latte",
-	styles = {
-		comments = "italic"
-	}
-})
 -- Colorizer
 require'colorizer'.setup()
 
