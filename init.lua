@@ -37,6 +37,8 @@ require('packer').startup(function()
 	use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 	use 'windwp/nvim-spectre' -- Search Tool
 	use 'gennaro-tedesco/nvim-commaround' -- Comment 
+	--Syntax
+	use 'Joorem/vim-haproxy'
 	-- Icons
 	use 'kyazdani42/nvim-web-devicons'
 	use 'ryanoasis/vim-devicons'
