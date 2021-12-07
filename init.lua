@@ -55,6 +55,7 @@ require('packer').startup(function()
 	use 'folke/tokyonight.nvim'
 	use 'NLKNguyen/papercolor-theme'
 	use 'shaunsingh/moonlight.nvim'
+	use 'rockerBOO/boo-colorscheme-nvim'
 end)
 
 -- Vim Options
@@ -93,7 +94,7 @@ require'nvim-web-devicons'.get_icons()
 vim.wo.t_Co = "256"
 vim.o.termguicolors = true
 vim.o.background = 'light'
-vim.cmd('colorscheme tokyonight')
+vim.cmd('colorscheme omni')
 --vim.g.tokyonight_style = 'storm'
 
 -- Colorizer
