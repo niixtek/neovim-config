@@ -304,12 +304,12 @@ vim.api.nvim_set_keymap('v', '<leader>c', '<Plug>ToggleCommaround', {})
 require('formatter').setup({
   logging = false,
   filetype = {
-    js, html, vue = {
+    javascript, html, vue = {
         -- prettier
        function()
           return {
             exe = "prettier",
-            args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0), '--single-quote'},
+            args = {"--stdin-filepath",  vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), '--single-quote'},
             stdin = true
           }
         end
