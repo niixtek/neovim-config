@@ -30,7 +30,7 @@ require('packer').startup(function()
 	use 'famiu/nvim-reload' -- Reload Lua Plugins
 	use 'mattn/emmet-vim' -- Emmet
 	use 'mhartington/formatter.nvim' -- Formatter
-	use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', config = function() require'nvim-tree'.setup {} end}
+	use { 'kyazdani42/nvim-tree.lua', config = function() require'nvim-tree'.setup {} end}
 	use { 'NTBBloodbath/rest.nvim', requires = { 'nvim-lua/plenary.nvim' } } 
   use 'tpope/vim-fugitive' -- Git Command 
   use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
