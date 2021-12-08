@@ -56,6 +56,7 @@ require('packer').startup(function()
 	use 'NLKNguyen/papercolor-theme'
 	use 'shaunsingh/moonlight.nvim'
 	use 'yonlu/omni.vim'
+	use 'Rigellute/shades-of-purple.vim'
 end)
 
 -- Vim Options
@@ -94,7 +95,7 @@ require'nvim-web-devicons'.get_icons()
 vim.wo.t_Co = "256"
 vim.o.termguicolors = true
 vim.o.background = 'dark'
-vim.cmd('colorscheme omni')
+vim.cmd('colorscheme shades_of_purple')
 --vim.g.tokyonight_style = 'storm'
 
 -- Colorizer
