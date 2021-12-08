@@ -44,7 +44,8 @@ require('packer').startup(function()
 	use 'ryanoasis/vim-devicons'
 	use 'yamatsum/nvim-nonicons'
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } } -- Telescope Manage Files Search
-	use 'windwp/windline.nvim' -- Status bar
+	-- Status bar
+	use 'nvim-lualine/lualine.nvim'
   use 'hrsh7th/nvim-compe' -- Autocompletion plugin
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
 	use 'p00f/nvim-ts-rainbow' -- Raintbow Parentheses
@@ -55,8 +56,7 @@ require('packer').startup(function()
 	use 'folke/tokyonight.nvim'
 	use 'NLKNguyen/papercolor-theme'
 	use 'shaunsingh/moonlight.nvim'
-	use 'yonlu/omni.vim'
-	use 'Rigellute/shades-of-purple.vim'
+	use 'rose-pine/neovim'
 end)
 
 -- Vim Options
@@ -95,14 +95,43 @@ require'nvim-web-devicons'.get_icons()
 vim.wo.t_Co = "256"
 vim.o.termguicolors = true
 vim.o.background = 'dark'
-vim.cmd('colorscheme shades_of_purple')
---vim.g.tokyonight_style = 'storm'
+vim.cmd('colorscheme rose-pine')
+vim.g.rose_pine_variant = 'moon'
+--vim.g.tokyonight_style = 'storm:
 
 -- Colorizer
 require'colorizer'.setup()
 
 -- Status Bar
-require('wlsample.bubble')
+require'lualine'.setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff',
+                  {'diagnostics', sources={'nvim_lsp', 'coc'}}},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
 
 -- Tabline Config
 require("bufferline").setup{
