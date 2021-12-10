@@ -4,50 +4,55 @@
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+	vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
 vim.api.nvim_exec(
-  [[
-  augroup Packer
-    autocmd!
-    autocmd BufWritePost init.lua PackerCompile
-  augroup end
+[[
+	augroup Packer
+	autocmd!
+	autocmd BufWritePost init.lua PackerCompile
+	augroup end
 ]],
-  false
+false
 )
 
 local use = require('packer').use
 require('packer').startup(function()
-  use 'wbthomason/packer.nvim' -- Package manager
-	use 'neovim/nvim-lspconfig' -- LSP
+	use 'wbthomason/packer.nvim' -- Package manager
+	--LSP
+	use 'neovim/nvim-lspconfig'
+	use 'williamboman/nvim-lsp-installer'
 	use 'nvim-treesitter/nvim-treesitter'
+
+	use 'nvim-telescope/telescope.nvim'
 	use 'akinsho/nvim-bufferline.lua' -- Buffer Tab
 	use "lukas-reineke/indent-blankline.nvim" -- Indent Line
-  use 'karb94/neoscroll.nvim' -- SmoothScroll
+	use 'karb94/neoscroll.nvim' -- SmoothScroll
 	use 'dstein64/nvim-scrollview' --Scrollbar
 	use 'edluffy/specs.nvim' -- Show Cursor when jumping 
 	use 'famiu/nvim-reload' -- Reload Lua Plugins
 	use 'mattn/emmet-vim' -- Emmet
 	use 'mhartington/formatter.nvim' -- Formatter
-	use { 'kyazdani42/nvim-tree.lua', config = function() require'nvim-tree'.setup {} end}
-	use { 'NTBBloodbath/rest.nvim', requires = { 'nvim-lua/plenary.nvim' } } 
-  use 'tpope/vim-fugitive' -- Git Command 
-  use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
-	use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+	use 'kyazdani42/nvim-tree.lua'
+	use  'NTBBloodbath/rest.nvim'
+	use 'tpope/vim-fugitive' -- Git Command 
+	use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
+	use 'lewis6991/gitsigns.nvim'
 	use 'windwp/nvim-spectre' -- Search Tool
 	use 'gennaro-tedesco/nvim-commaround' -- Comment 
+	use 'nvim-lua/plenary.nvim'
+	use 'nvim-lua/popup.nvim'
 	--Syntax
 	use 'Joorem/vim-haproxy'
 	-- Icons
 	use 'kyazdani42/nvim-web-devicons'
-	use 'ryanoasis/vim-devicons'
-	use 'yamatsum/nvim-nonicons'
-  use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } } -- Telescope Manage Files Search
+	--use 'ryanoasis/vim-devicons'
+	--use 'yamatsum/nvim-nonicons'
 	-- Status bar
 	use 'nvim-lualine/lualine.nvim'
-  use 'hrsh7th/nvim-compe' -- Autocompletion plugin
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
+	use 'hrsh7th/nvim-compe' -- Autocompletion plugin
+	use 'L3MON4D3/LuaSnip' -- Snippets plugin
 	use 'p00f/nvim-ts-rainbow' -- Raintbow Parentheses
 	use 'norcalli/nvim-colorizer.lua'
 	-- remote
@@ -96,7 +101,7 @@ vim.wo.t_Co = "256"
 vim.o.termguicolors = true
 vim.o.background = 'dark'
 vim.cmd('colorscheme rose-pine')
-vim.g.rose_pine_variant = 'moon'
+--vim.g.rose_pine_variant = 'moon'
 --vim.g.tokyonight_style = 'storm:
 
 -- Colorizer
@@ -104,33 +109,32 @@ require'colorizer'.setup()
 
 -- Status Bar
 require'lualine'.setup {
-  options = {
-    icons_enabled = true,
-    theme = 'auto',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {},
-    always_divide_middle = true,
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff',
-                  {'diagnostics', sources={'nvim_lsp', 'coc'}}},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  extensions = {}
+	options = {
+		--icons_enabled = true,
+		theme = 'auto',
+		component_separators = { left = '', right = ''},
+		section_separators = { left = '', right = ''},
+		disabled_filetypes = {},
+		always_divide_middle = true,
+	},
+	sections = {
+		lualine_a = {'mode'},
+		lualine_b = {'branch', 'diff', 'FugitiveHead'},
+		lualine_c = {'filename'},
+		lualine_x = {'encoding', 'fileformat', 'filetype'},
+		lualine_y = {'progress'},
+		lualine_z = {'location'}
+	},
+	inactive_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {'filename'},
+		lualine_x = {'location'},
+		lualine_y = {},
+		lualine_z = {}
+	},
+	tabline = {},
+	extensions = {}
 }
 
 -- Tabline Config
@@ -174,34 +178,34 @@ vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeFindFile<CR>', { silent = tr
 
 -- ScrollBar
 vim.api.nvim_exec(
-	[[
-	augroup ScrollbarInit
-		autocmd!
-		autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
-		autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
-		autocmd WinLeave,BufLeave,BufWinLeave,FocusLost            * silent! lua require('scrollbar').clear()
-	augroup end
-	]],
-	false
+[[
+augroup ScrollbarInit
+autocmd!
+autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
+autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
+autocmd WinLeave,BufLeave,BufWinLeave,FocusLost            * silent! lua require('scrollbar').clear()
+augroup end
+]],
+false
 )
 
 -- Specs
 require('specs').setup{ 
-    show_jumps  = true,
-    min_jump = 30,
-    popup = {
-        delay_ms = 0, -- delay before popup displays
-        inc_ms = 20, -- time increments used for fade/resize effects 
-        blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
-        width = 20,
-        winhl = "PMenu",
-        fader = require('specs').pulse_fader,
-        resizer = require('specs').shrink_resizer
-    },
-    ignore_filetypes = {},
-    ignore_buftypes = {
-        nofile = true,
-    },
+	show_jumps  = true,
+	min_jump = 30,
+	popup = {
+		delay_ms = 0, -- delay before popup displays
+		inc_ms = 20, -- time increments used for fade/resize effects 
+		blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+		width = 20,
+		winhl = "PMenu",
+		fader = require('specs').pulse_fader,
+		resizer = require('specs').shrink_resizer
+	},
+	ignore_filetypes = {},
+	ignore_buftypes = {
+		nofile = true,
+	},
 }
 
 --Distant
@@ -212,48 +216,48 @@ require('distant').setup{
 
 -- TeleScope
 require('telescope').setup{
-  defaults = {
-    vimgrep_arguments = {
-      'rg',
-      '--color=never',
-      '--no-heading',
-      '--with-filename',
-      '--line-number',
-      '--column',
-      '--smart-case'
-    },
-    prompt_prefix = "> ",
-    selection_caret = "> ",
-    entry_prefix = "  ",
-    initial_mode = "insert",
-    selection_strategy = "reset",
-    sorting_strategy = "descending",
-    layout_strategy = "horizontal",
-    layout_config = {
-      horizontal = {
-        mirror = false,
-      },
-      vertical = {
-        mirror = false,
-      },
-    },
-    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
-    file_ignore_patterns = {},
-    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
-    winblend = 0,
-    border = {},
-    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-    color_devicons = true,
-    use_less = true,
-    path_display = {},
-    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
-    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+	defaults = {
+		vimgrep_arguments = {
+			'rg',
+			'--color=never',
+			'--no-heading',
+			'--with-filename',
+			'--line-number',
+			'--column',
+			'--smart-case'
+		},
+		prompt_prefix = "> ",
+		selection_caret = "> ",
+		entry_prefix = "  ",
+		initial_mode = "insert",
+		selection_strategy = "reset",
+		sorting_strategy = "descending",
+		layout_strategy = "horizontal",
+		layout_config = {
+			horizontal = {
+				mirror = false,
+			},
+			vertical = {
+				mirror = false,
+			},
+		},
+		file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+		file_ignore_patterns = {},
+		generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+		winblend = 0,
+		border = {},
+		borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+		color_devicons = true,
+		use_less = true,
+		path_display = {},
+		set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+		file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+		grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+		qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
 
-    -- Developer configurations: Not meant for general override
-    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
-  }
+		-- Developer configurations: Not meant for general override
+		buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+	}
 }
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>lg', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
@@ -265,47 +269,47 @@ vim.api.nvim_set_keymap('n', '<leader>//', ':Telescope<CR>', { noremap = true, s
 --Compe
 vim.o.completeopt = "menuone,noselect"
 require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  resolve_timeout = 800;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = {
-    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    max_width = 120,
-    min_width = 60,
-    max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1,
-  };
-  source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    vsnip = true;
-    ultisnips = true;
-    luasnip = true;
-  };
+	enabled = true;
+	autocomplete = true;
+	debug = false;
+	min_length = 1;
+	preselect = 'enable';
+	throttle_time = 80;
+	source_timeout = 200;
+	resolve_timeout = 800;
+	incomplete_delay = 400;
+	max_abbr_width = 100;
+	max_kind_width = 100;
+	max_menu_width = 100;
+	documentation = {
+		border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+		winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+		max_width = 120,
+		min_width = 60,
+		max_height = math.floor(vim.o.lines * 0.3),
+		min_height = 1,
+	};
+	source = {
+		path = true;
+		buffer = true;
+		calc = true;
+		nvim_lsp = true;
+		nvim_lua = true;
+		vsnip = true;
+		ultisnips = true;
+		luasnip = true;
+	};
 }
 
 -- Gitsigns
 require('gitsigns').setup {
-  signs = {
-    add = { hl = 'GitGutterAdd', text = '+' },
-    change = { hl = 'GitGutterChange', text = '~' },
-    delete = { hl = 'GitGutterDelete', text = '_' },
-    topdelete = { hl = 'GitGutterDelete', text = '‾' },
-    changedelete = { hl = 'GitGutterChange', text = '~' },
-  },
+	signs = {
+		add = { hl = 'GitGutterAdd', text = '+' },
+		change = { hl = 'GitGutterChange', text = '~' },
+		delete = { hl = 'GitGutterDelete', text = '_' },
+		topdelete = { hl = 'GitGutterDelete', text = '‾' },
+		changedelete = { hl = 'GitGutterChange', text = '~' },
+	},
 }
 
 --Rest Tool
@@ -316,15 +320,18 @@ vim.api.nvim_set_keymap('n', '<leader>rr', [[<cmd>lua require('rest-nvim').run()
 vim.g.user_emmet_mode = 'i'
 vim.g.user_emmet_leader_key = ','
 
--- Raintbow Parentheses
+--Treesitter
 require'nvim-treesitter.configs'.setup {
-  rainbow = {
-    enable = true,
-    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-    max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-    colors = {}, -- table of hex strings
-    termcolors = {} -- table of colour name strings
-  }
+	highlight = {
+		enable = true,
+	},
+	rainbow = {
+		enable = true,
+		extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+		max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
+		colors = {}, -- table of hex strings
+		termcolors = {} -- table of colour name strings
+	}
 }
 
 -- nvim-commaround
@@ -332,49 +339,49 @@ vim.api.nvim_set_keymap('v', '<leader>c', '<Plug>ToggleCommaround', {})
 
 -- Formatter
 require('formatter').setup({
-  logging = false,
-  filetype = {
-    javascript, html, vue = {
-        -- prettier
-       function()
-          return {
-            exe = "prettier",
-            args = {"--stdin-filepath",  vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), '--single-quote'},
-            stdin = true
-          }
-        end
-    },
-    rust = {
-      -- Rustfmt
-      function()
-        return {
-          exe = "rustfmt",
-          args = {"--emit=stdout"},
-          stdin = true
-        }
-      end
-    },
-    lua = {
-        -- luafmt
-        function()
-          return {
-            exe = "luafmt",
-            args = {"--indent-count", 2, "--stdin"},
-            stdin = true
-          }
-        end
-    },
-    cpp = {
-        -- clang-format
-       function()
-          return {
-            exe = "clang-format",
-            args = {},
-            stdin = true,
-            cwd = vim.fn.expand('%:p:h')  -- Run clang-format in cwd of the file.
-          }
-        end
-    }
-  }
+	logging = false,
+	filetype = {
+		javascript, html, vue = {
+			-- prettier
+			function()
+				return {
+					exe = "prettier",
+					args = {"--stdin-filepath",  vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), '--single-quote'},
+					stdin = true
+				}
+			end
+		},
+		rust = {
+			-- Rustfmt
+			function()
+				return {
+					exe = "rustfmt",
+					args = {"--emit=stdout"},
+					stdin = true
+				}
+			end
+		},
+		lua = {
+			-- luafmt
+			function()
+				return {
+					exe = "luafmt",
+					args = {"--indent-count", 2, "--stdin"},
+					stdin = true
+				}
+			end
+		},
+		cpp = {
+			-- clang-format
+			function()
+				return {
+					exe = "clang-format",
+					args = {},
+					stdin = true,
+					cwd = vim.fn.expand('%:p:h')  -- Run clang-format in cwd of the file.
+				}
+			end
+		}
+	}
 })
 vim.api.nvim_set_keymap('n', '<leader>f', ':Format<CR>', { silent = true })
