@@ -161,10 +161,10 @@ vim.g.nvim_tree_show_icons = {
 	folder_arrows= 1,
 }
 require 'nvim-tree'.setup {
-	ignore_ft_on_setup = {'.git', 'node_modules', '.cache'}, 
-	git = { 
+	ignore_ft_on_setup = {'.git', 'node_modules', '.cache'},
+	git = {
 		enable = true,
-		ignore = true,
+		ignore = false,
 		timeout = 500,
 	},
 	filters = {
@@ -334,6 +334,7 @@ require'lspconfig'.volar.setup{
 }
 
 require'lspconfig'.csharp_ls.setup{}
+require'lspconfig'.jsonls.setup{}
 
 require'lspconfig'.sumneko_lua.setup{}
 
