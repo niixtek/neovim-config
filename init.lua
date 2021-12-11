@@ -30,17 +30,18 @@ require('packer').startup(function()
 	use "lukas-reineke/indent-blankline.nvim" -- Indent Line
 	use 'karb94/neoscroll.nvim' -- SmoothScroll
 	use 'dstein64/nvim-scrollview' --Scrollbar
-	use 'edluffy/specs.nvim' -- Show Cursor when jumping 
+	use 'edluffy/specs.nvim' -- Show Cursor when jumping
 	use 'famiu/nvim-reload' -- Reload Lua Plugins
 	use 'mattn/emmet-vim' -- Emmet
 	use 'mhartington/formatter.nvim' -- Formatter
 	use 'kyazdani42/nvim-tree.lua'
 	use  'NTBBloodbath/rest.nvim'
-	use 'tpope/vim-fugitive' -- Git Command 
+	-- Git Command
+	use 'tpope/vim-fugitive'
 	use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
 	use 'lewis6991/gitsigns.nvim'
 	use 'windwp/nvim-spectre' -- Search Tool
-	use 'gennaro-tedesco/nvim-commaround' -- Comment 
+	use 'gennaro-tedesco/nvim-commaround' -- Comment
 	use 'nvim-lua/plenary.nvim'
 	use 'nvim-lua/popup.nvim'
 	--Syntax
@@ -179,12 +180,12 @@ vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeFindFile<CR>', { silent = tr
 -- ScrollBar
 vim.api.nvim_exec(
 [[
-augroup ScrollbarInit
-autocmd!
-autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
-autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
-autocmd WinLeave,BufLeave,BufWinLeave,FocusLost            * silent! lua require('scrollbar').clear()
-augroup end
+	augroup ScrollbarInit
+	autocmd!
+	autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
+	autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
+	autocmd WinLeave,BufLeave,BufWinLeave,FocusLost            * silent! lua require('scrollbar').clear()
+	augroup end
 ]],
 false
 )
@@ -320,6 +321,22 @@ vim.api.nvim_set_keymap('n', '<leader>rr', [[<cmd>lua require('rest-nvim').run()
 vim.g.user_emmet_mode = 'i'
 vim.g.user_emmet_leader_key = ','
 
+--Lsp
+vim.api.nvim_set_keymap('n', '<leader>f', '[[<cmd>lua vim.lsp.buf.formatting()<CR>]]', { silent = true })
+
+require'lspconfig'.volar.setup{
+  filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
+	init_options = {
+		typescript = {
+      serverPath = '/home/ron/.npm-global/lib/node_modules/typescript/lib/tsserverlibrary.js'
+    }
+	}
+}
+
+require'lspconfig'.csharp_ls.setup{}
+
+require'lspconfig'.sumneko_lua.setup{}
+
 --Treesitter
 require'nvim-treesitter.configs'.setup {
 	highlight = {
@@ -384,4 +401,6 @@ require('formatter').setup({
 		}
 	}
 })
-vim.api.nvim_set_keymap('n', '<leader>f', ':Format<CR>', { silent = true })
+--vim.api.nvim_set_keymap('n', '<leader>f', ':Format<CR>', { silent = true })
+
+
