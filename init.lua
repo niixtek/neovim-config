@@ -75,10 +75,10 @@ vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 vim.o.ignorecase = true
 vim.o.smartcase = true
-vim.o.updatetime = 250 
+vim.o.updatetime = 250
 --vim.o.hidden = true --Do not save when swap buffer
 vim.o.hlsearch = true
-vim.o.breakindent = true 
+vim.o.breakindent = true
 vim.wo.signcolumn = 'yes'
 vim.wo.number = true
 --vim.wo.cursorcolumn = true
@@ -353,54 +353,4 @@ require'nvim-treesitter.configs'.setup {
 
 -- nvim-commaround
 vim.api.nvim_set_keymap('v', '<leader>c', '<Plug>ToggleCommaround', {})
-
--- Formatter
-require('formatter').setup({
-	logging = false,
-	filetype = {
-		javascript, html, vue = {
-			-- prettier
-			function()
-				return {
-					exe = "prettier",
-					args = {"--stdin-filepath",  vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), '--single-quote'},
-					stdin = true
-				}
-			end
-		},
-		rust = {
-			-- Rustfmt
-			function()
-				return {
-					exe = "rustfmt",
-					args = {"--emit=stdout"},
-					stdin = true
-				}
-			end
-		},
-		lua = {
-			-- luafmt
-			function()
-				return {
-					exe = "luafmt",
-					args = {"--indent-count", 2, "--stdin"},
-					stdin = true
-				}
-			end
-		},
-		cpp = {
-			-- clang-format
-			function()
-				return {
-					exe = "clang-format",
-					args = {},
-					stdin = true,
-					cwd = vim.fn.expand('%:p:h')  -- Run clang-format in cwd of the file.
-				}
-			end
-		}
-	}
-})
---vim.api.nvim_set_keymap('n', '<leader>f', ':Format<CR>', { silent = true })
-
 
