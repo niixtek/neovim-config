@@ -64,6 +64,7 @@ require('packer').startup(function()
 	use 'NLKNguyen/papercolor-theme'
 	use 'shaunsingh/moonlight.nvim'
 	use 'rose-pine/neovim'
+	use 'thedenisnikulin/vim-cyberpunk'
 end)
 
 -- Vim Options
@@ -102,7 +103,7 @@ require'nvim-web-devicons'.get_icons()
 vim.wo.t_Co = "256"
 vim.o.termguicolors = true
 vim.o.background = 'dark'
-vim.cmd('colorscheme rose-pine')
+vim.cmd('colorscheme cyberpunk')
 --vim.g.rose_pine_variant = 'moon'
 --vim.g.tokyonight_style = 'storm:
 
