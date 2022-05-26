@@ -26,7 +26,7 @@ require('packer').startup(function()
 	use 'nvim-treesitter/nvim-treesitter'
 
 	use 'nvim-telescope/telescope.nvim'
-	use 'akinsho/nvim-bufferline.lua' -- Buffer Tab
+	use {'akinsho/bufferline.nvim', tag = 'v2.*'} -- Buffer Tab
 	use "lukas-reineke/indent-blankline.nvim" -- Indent Line
 	use 'karb94/neoscroll.nvim' -- SmoothScroll
 	use 'dstein64/nvim-scrollview' --Scrollbar
@@ -35,7 +35,7 @@ require('packer').startup(function()
 	use 'mattn/emmet-vim' -- Emmet
 	use 'mhartington/formatter.nvim' -- Formatter
 	use 'kyazdani42/nvim-tree.lua'
-	use "akinsho/toggleterm.nvim"
+	use {"akinsho/toggleterm.nvim", tag = 'v1.*', config = function() require("toggleterm").setup() end}
 	use  'NTBBloodbath/rest.nvim'
 	-- Git Command
 	use 'tpope/vim-fugitive'
@@ -144,7 +144,8 @@ require'lualine'.setup {
 -- Tabline Config
 require("bufferline").setup{
 	options = {
-		separator_style = 'slant'
+		show_buffer_close_icons = false,
+		separator_style = 'thin'
 	}
 }
 vim.api.nvim_set_keymap('n', '<A-.>', ':BufferLineCycleNext<CR>', { silent = true })
@@ -355,7 +356,9 @@ require('gitsigns').setup {
 }
 
 --Rest Tool
-require('rest-nvim').setup()
+require('rest-nvim').setup({
+	skip_ssl_verification = false,
+})
 vim.api.nvim_set_keymap('n', '<leader>rr', [[<cmd>lua require('rest-nvim').run()<CR>]], { noremap = true, silent = true })
 
 -- Emmet
@@ -369,7 +372,7 @@ require'lspconfig'.volar.setup{
   filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
 	init_options = {
 		typescript = {
-      serverPath = '/home/node/node_modules/typescript/lib/tsserverlibrary.js'
+      serverPath = '/home/ron/node_modules/typescript/lib/tsserverlibrary.js'
     }
 	}
 }
@@ -381,6 +384,7 @@ require'lspconfig'.sumneko_lua.setup{}
 
 --Treesitter
 require'nvim-treesitter.configs'.setup {
+	ensure_installed = { "c", "lua", "rust", "http", "json" },
 	highlight = {
 		enable = true,
 	},
