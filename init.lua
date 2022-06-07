@@ -66,6 +66,7 @@ require('packer').startup(function()
 	use 'thedenisnikulin/vim-cyberpunk'
 	use 'EdenEast/nightfox.nvim'
 	use 'jsit/toast.vim'
+	use 'averak/laserwave.vim'
 end)
 
 -- Vim Options
@@ -104,8 +105,9 @@ require'nvim-web-devicons'.get_icons()
 vim.wo.t_Co = "256"
 vim.o.termguicolors = true
 vim.o.background = 'dark'
-vim.cmd('colorscheme toast')
---vim.g.rose_pine_variant = 'moon'
+--vim.cmd('colorscheme toast')
+vim.cmd('colorscheme laserwave')
+--vim.g.rose_pine_variant .vim= 'moon'
 --vim.g.tokyonight_style = 'night'
 
 -- Colorizer
@@ -378,7 +380,12 @@ require'lspconfig'.volar.setup{
 }
 
 require'lspconfig'.csharp_ls.setup{}
-require'lspconfig'.jsonls.setup{}
+require'lspconfig'.jsonls.setup{
+	init_options = {
+		provideFormatter = true
+	},
+	cmd = { "vscode-json-languageserver", "--stdio" }
+}
 
 require'lspconfig'.sumneko_lua.setup{}
 
