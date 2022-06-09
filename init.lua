@@ -49,8 +49,6 @@ require('packer').startup(function()
 	use 'Joorem/vim-haproxy'
 	-- Icons
 	use 'kyazdani42/nvim-web-devicons'
-	--use 'ryanoasis/vim-devicons'
-	--use 'yamatsum/nvim-nonicons'
 	-- Status bar
 	use 'nvim-lualine/lualine.nvim'
 	use 'hrsh7th/nvim-compe' -- Autocompletion plugin
@@ -60,13 +58,8 @@ require('packer').startup(function()
 	-- remote
 	use 'chipsenkbeil/distant.nvim'
 	-- Themes;
-	use 'folke/tokyonight.nvim'
-	use 'shaunsingh/moonlight.nvim'
-	use 'rose-pine/neovim'
-	use 'thedenisnikulin/vim-cyberpunk'
-	use 'EdenEast/nightfox.nvim'
-	use 'jsit/toast.vim'
 	use 'averak/laserwave.vim'
+	use 'chriskempson/base16-vim'
 end)
 
 -- Vim Options
@@ -104,11 +97,9 @@ require'nvim-web-devicons'.get_icons()
 -- Theme
 vim.wo.t_Co = "256"
 vim.o.termguicolors = true
+
 vim.o.background = 'dark'
---vim.cmd('colorscheme toast')
-vim.cmd('colorscheme laserwave')
---vim.g.rose_pine_variant .vim= 'moon'
---vim.g.tokyonight_style = 'night'
+vim.cmd('colorscheme base16-outrun-dark')
 
 -- Colorizer
 require'colorizer'.setup()
@@ -146,8 +137,10 @@ require'lualine'.setup {
 -- Tabline Config
 require("bufferline").setup{
 	options = {
+		tab_size = 15,
 		show_buffer_close_icons = false,
-		separator_style = 'thin'
+		separator_style = 'slant',
+		show_tab_indicators = true
 	}
 }
 vim.api.nvim_set_keymap('n', '<A-.>', ':BufferLineCycleNext<CR>', { silent = true })
@@ -380,6 +373,7 @@ require'lspconfig'.volar.setup{
 }
 
 require'lspconfig'.csharp_ls.setup{}
+
 require'lspconfig'.jsonls.setup{
 	init_options = {
 		provideFormatter = true
