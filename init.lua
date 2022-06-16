@@ -107,7 +107,7 @@ require'colorizer'.setup()
 -- Status Bar
 require'lualine'.setup {
 	options = {
-		--icons_enabled = true,
+		icons_enabled = true,
 		theme = 'auto',
 		component_separators = { left = '', right = ''},
 		section_separators = { left = '', right = ''},
@@ -160,15 +160,15 @@ vim.g.nvim_tree_show_icons = {
 	folder_arrows= 1,
 }
 require 'nvim-tree'.setup {
-	ignore_ft_on_setup = {'.git', 'node_modules', '.cache'},
+	auto_reload_on_write = true, 
 	git = {
 		enable = true,
-		ignore = false,
+		ignore = true,
 		timeout = 500,
 	},
 	filters = {
-		dotfile = true,
-		custom = { '.git',  'node_modules' },
+		dotfiles = true,
+		exclude = { 'run.sh', '.env', '.env.local' },
 	},
 }
 
@@ -228,7 +228,7 @@ require("toggleterm").setup{
   hide_numbers = true, -- hide the number column in toggleterm buffers
   shade_filetypes = {},
   shade_terminals = true,
-  shading_factor = '<number>', -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+  shading_factor = '1', -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
   start_in_insert = true,
   insert_mappings = true, -- whether or not the open mapping applies in insert mode
   persist_size = true,
@@ -378,14 +378,14 @@ require'lspconfig'.jsonls.setup{
 	init_options = {
 		provideFormatter = true
 	},
-	cmd = { "vscode-json-languageserver", "--stdio" }
+--	cmd = { "vscode-json-languageserver", "--stdie" }
 }
 
 require'lspconfig'.sumneko_lua.setup{}
 
 --Treesitter
 require'nvim-treesitter.configs'.setup {
-	ensure_installed = { "c", "lua", "rust", "http", "json" },
+	ensure_installed = { "c", "lua", "rust", "http", "json", "css", "scss", "c_sharp", "javascript" },
 	highlight = {
 		enable = true,
 	},
