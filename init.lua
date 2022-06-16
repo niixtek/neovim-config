@@ -35,7 +35,7 @@ require('packer').startup(function()
 	use 'mattn/emmet-vim' -- Emmet
 	use 'mhartington/formatter.nvim' -- Formatter
 	use 'kyazdani42/nvim-tree.lua'
-	use {"akinsho/toggleterm.nvim", tag = 'v1.*', config = function() require("toggleterm").setup() end}
+	use {"akinsho/toggleterm.nvim", tag = 'v1.*'}
 	use  'NTBBloodbath/rest.nvim'
 	-- Git Command
 	use 'tpope/vim-fugitive'
@@ -81,6 +81,17 @@ vim.wo.number = true
 --vim.wo.cursorcolumn = true
 vim.wo.cursorline = true
 --vim.cmd [[set undofile]]
+
+-- Show Space and EOL Symbol
+vim.opt.list = true
+vim.opt.listchars:append("space:·")
+vim.opt.listchars:append("eol:↴")
+
+-- Blank Line
+require("indent_blankline").setup {
+	show_end_of_line = true,
+	space_char_blankline = " ",
+}
 
 --Smooth Scroll
 require('neoscroll').setup()
