@@ -85,12 +85,28 @@ vim.wo.cursorline = true
 -- Show Space and EOL Symbol
 vim.opt.list = true
 vim.opt.listchars:append("space:·")
+vim.opt.listchars:append("tab:▸ ")
 vim.opt.listchars:append("eol:↴")
 
 -- Blank Line
+vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 require("indent_blankline").setup {
 	show_end_of_line = true,
 	space_char_blankline = " ",
+	char_highlight_list = {
+		"IndentBlanklineIndent1",
+		"IndentBlanklineIndent2",
+		"IndentBlanklineIndent3",
+		"IndentBlanklineIndent4",
+		"IndentBlanklineIndent5",
+		"IndentBlanklineIndent6",
+},
+
 }
 
 --Smooth Scroll
@@ -179,7 +195,7 @@ require 'nvim-tree'.setup {
 	},
 	filters = {
 		dotfiles = true,
-		exclude = { 'run.sh', '.env', '.env.local' },
+		exclude = { 'run.sh', '.env', '.env.local', '.gitignore', '.dockerignore' },
 	},
 }
 
@@ -383,20 +399,24 @@ require'lspconfig'.volar.setup{
 	}
 }
 
+require'lspconfig'.html.setup{}
+
 require'lspconfig'.csharp_ls.setup{}
 
 require'lspconfig'.jsonls.setup{
 	init_options = {
 		provideFormatter = true
 	},
---	cmd = { "vscode-json-languageserver", "--stdie" }
+--	cmd = { "vscode-json-languageserver", "--stdio" }
 }
+
+require'lspconfig'.pyright.setup{}
 
 require'lspconfig'.sumneko_lua.setup{}
 
 --Treesitter
 require'nvim-treesitter.configs'.setup {
-	ensure_installed = { "c", "lua", "rust", "http", "json", "css", "scss", "c_sharp", "javascript" },
+	ensure_installed = { "c", "python", "lua", "rust", "http", "html", "json", "css", "scss", "c_sharp", "javascript" },
 	highlight = {
 		enable = true,
 	},
