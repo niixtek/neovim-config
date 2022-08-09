@@ -47,6 +47,7 @@ require('packer').startup(function()
 	use 'nvim-lua/popup.nvim'
 	--Syntax
 	use 'Joorem/vim-haproxy'
+	use 'jidn/vim-dbml'
 	-- Icons
 	use 'kyazdani42/nvim-web-devicons'
 	-- Status bar
@@ -82,7 +83,7 @@ vim.wo.number = true
 vim.wo.cursorline = true
 --vim.cmd [[set undofile]]
 
--- Show Space and EOL Symbol
+-- Show Space Tab and EOL Symbol
 vim.opt.list = true
 vim.opt.listchars:append("space:·")
 vim.opt.listchars:append("tab:▸ ")
