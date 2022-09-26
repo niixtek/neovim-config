@@ -33,6 +33,7 @@ require('packer').startup(function()
 	use 'lukas-reineke/indent-blankline.nvim' -- Indent Line
 	use 'karb94/neoscroll.nvim' -- SmoothScroll
 	use 'dstein64/nvim-scrollview' --Scrollbar
+	use 'yamatsum/nvim-cursorline'
 	use 'edluffy/specs.nvim' -- Show Cursor when jumping
 	use 'famiu/nvim-reload' -- Reload Lua Plugins
 	use 'mattn/emmet-vim' -- Emmet
@@ -114,8 +115,21 @@ require('indent_blankline').setup {
 		'IndentBlanklineIndent4',
 		'IndentBlanklineIndent5',
 		'IndentBlanklineIndent6',
-},
+	},
+}
 
+--Cursor Line
+require('nvim-cursorline').setup {
+  cursorline = {
+    enable = true,
+    timeout = 500,
+    number = false,
+  },
+  cursorword = {
+    enable = true,
+    min_length = 3,
+    hl = { underline = true },
+  }
 }
 
 --Smooth Scroll
