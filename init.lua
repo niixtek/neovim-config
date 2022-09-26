@@ -36,6 +36,7 @@ require('packer').startup(function()
 	use 'mhartington/formatter.nvim' -- Formatter
 	use 'kyazdani42/nvim-tree.lua'
 	use {'akinsho/toggleterm.nvim', tag = 'v1.*'}
+	use 'natecraddock/workspaces.nvim' 
 	use  'NTBBloodbath/rest.nvim'
 	use 'm4xshen/autoclose.nvim'
 	use 'beauwilliams/focus.nvim'
@@ -64,6 +65,7 @@ require('packer').startup(function()
 	-- Themes;
 	use 'averak/laserwave.vim'
 	use 'chriskempson/base16-vim'
+	use 'akai54/2077.nvim'
 end)
 
 -- Vim Options
@@ -130,7 +132,7 @@ vim.wo.t_Co = '256'
 vim.o.termguicolors = true
 
 vim.o.background = 'dark'
-vim.cmd('colorscheme base16-outrun-dark')
+vim.cmd('colorscheme 2077')
 
 -- Colorizer
 require('colorizer').setup()
@@ -238,6 +240,9 @@ require('specs').setup{
 		nofile = true,
 	},
 }
+
+-- Workspace 
+require("workspaces").setup()
 
 --Focus
 require('focus').setup()
