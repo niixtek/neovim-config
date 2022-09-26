@@ -37,6 +37,8 @@ require('packer').startup(function()
 	use 'kyazdani42/nvim-tree.lua'
 	use {"akinsho/toggleterm.nvim", tag = 'v1.*'}
 	use  'NTBBloodbath/rest.nvim'
+	use 'm4xshen/autoclose.nvim'
+	use 'beauwilliams/focus.nvim'
 	-- Git Command
 	use 'tpope/vim-fugitive'
 	use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
@@ -210,8 +212,8 @@ vim.api.nvim_exec(
 	augroup ScrollbarInit
 	autocmd!
 	autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
-	autocmd WinEnter,FocusGained           * silent! lua require('scrollbar').show()
-	autocmd WinLeave,BufLeave,BufWinLeave,FocusLost            * silent! lua require('scrollbar').clear()
+	autocmd WinEnter,FocusGained * silent! lua require('scrollbar').show()
+	autocmd WinLeave,BufLeave,BufWinLeave,FocusLost * silent! lua require('scrollbar').clear()
 	augroup end
 ]],
 false
@@ -235,6 +237,11 @@ require('specs').setup{
 		nofile = true,
 	},
 }
+
+--Fucus
+require("focus").setup()
+vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true })
+
 
 --Distant
 local actions = require('distant.nav.actions')
