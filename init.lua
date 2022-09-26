@@ -26,6 +26,9 @@ require('packer').startup(function()
 	use 'nvim-treesitter/nvim-treesitter'
 
 	use 'nvim-telescope/telescope.nvim'
+	use 'nvim-telescope/telescope-file-browser.nvim'
+	use 'nvim-telescope/telescope-project.nvim'
+	use 'nvim-telescope/telescope-media-files.nvim'
 	use {'akinsho/bufferline.nvim', tag = 'v2.*'} -- Buffer Tab
 	use 'lukas-reineke/indent-blankline.nvim' -- Indent Line
 	use 'karb94/neoscroll.nvim' -- SmoothScroll
@@ -245,16 +248,16 @@ require('specs').setup{
 }
 
 -- Workspace 
-require("workspaces").setup({
+require('workspaces').setup({
 	hooks = {
-		open = { "NvimTreeOpen"},
+		open = { 'Telescope file_browser' },
 	}
 })
 
 --Session
-require("sessions").setup({
+require('sessions').setup({
 	hooks = {
-		open = { "NvimTreeOpen"},
+		open = { 'NvimTreeOpen' },
 	}
 })
 
@@ -316,7 +319,7 @@ require('toggleterm').setup({
 -- TeleScope
 require('telescope').setup({
 	defaults = {
-		vimgrep_arguments = {
+--[[ 		vimgrep_arguments = {
 			'rg',
 			'--color=never',
 			'--no-heading',
@@ -355,14 +358,37 @@ require('telescope').setup({
 		qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 
 		-- Developer configurations: Not meant for general override
-		buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker
+		buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker, ]]
+		file_ignore_patterns = { 
+			'node_modules',
+			'__pycache__' 
+		},
+		extensions = {
+			workspaces = {
+				keep_insert = true,
+			},
+			media_files = {
+				-- filetypes whitelist
+				-- defaults to {'png', 'jpg', 'mp4', 'webm', 'pdf'}
+				filetypes = {'png', 'webp', 'jpg', 'jpeg'},
+				find_cmd = 'rg' -- find command (defaults to `fd`)
+			},
+		},
 	}
 })
+--load Telescope plugins
+require("telescope").load_extension "file_browser"
+require'telescope'.load_extension('workspaces')
+require'telescope'.load_extension('project')
+require('telescope').load_extension('media_files')
+
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>lg', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').file_browser()<CR>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>gg', [[<cmd>lua require('telescope.builtin').git_status()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>pp', [[<cmd>lua require'telescope'.extensions.project.project{}<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ww', [[<cmd>lua require'telescope'.extensions.workspaces.workspaces{}<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require'telescope'.extensions.file_browser.file_browser{}<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>//', ':Telescope<CR>', { noremap = true, silent = true })
 
 --Compe
