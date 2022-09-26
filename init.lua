@@ -27,7 +27,7 @@ require('packer').startup(function()
 
 	use 'nvim-telescope/telescope.nvim'
 	use {'akinsho/bufferline.nvim', tag = 'v2.*'} -- Buffer Tab
-	use "lukas-reineke/indent-blankline.nvim" -- Indent Line
+	use 'lukas-reineke/indent-blankline.nvim' -- Indent Line
 	use 'karb94/neoscroll.nvim' -- SmoothScroll
 	use 'dstein64/nvim-scrollview' --Scrollbar
 	use 'edluffy/specs.nvim' -- Show Cursor when jumping
@@ -35,7 +35,7 @@ require('packer').startup(function()
 	use 'mattn/emmet-vim' -- Emmet
 	use 'mhartington/formatter.nvim' -- Formatter
 	use 'kyazdani42/nvim-tree.lua'
-	use {"akinsho/toggleterm.nvim", tag = 'v1.*'}
+	use {'akinsho/toggleterm.nvim', tag = 'v1.*'}
 	use  'NTBBloodbath/rest.nvim'
 	use 'm4xshen/autoclose.nvim'
 	use 'beauwilliams/focus.nvim'
@@ -87,9 +87,9 @@ vim.wo.cursorline = true
 
 -- Show Space Tab and EOL Symbol
 vim.opt.list = true
-vim.opt.listchars:append("space:·")
-vim.opt.listchars:append("tab:▸ ")
-vim.opt.listchars:append("eol:↴")
+vim.opt.listchars:append('space:·')
+vim.opt.listchars:append('tab:▸ ')
+vim.opt.listchars:append('eol:↴')
 
 -- Blank Line
 vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
@@ -98,16 +98,16 @@ vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-require("indent_blankline").setup {
+require('indent_blankline').setup {
 	show_end_of_line = true,
-	space_char_blankline = " ",
+	space_char_blankline = ' ',
 	char_highlight_list = {
-		"IndentBlanklineIndent1",
-		"IndentBlanklineIndent2",
-		"IndentBlanklineIndent3",
-		"IndentBlanklineIndent4",
-		"IndentBlanklineIndent5",
-		"IndentBlanklineIndent6",
+		'IndentBlanklineIndent1',
+		'IndentBlanklineIndent2',
+		'IndentBlanklineIndent3',
+		'IndentBlanklineIndent4',
+		'IndentBlanklineIndent5',
+		'IndentBlanklineIndent6',
 },
 
 }
@@ -125,7 +125,7 @@ require'nvim-web-devicons'.has_loaded()
 require'nvim-web-devicons'.get_icons()
 
 -- Theme
-vim.wo.t_Co = "256"
+vim.wo.t_Co = '256'
 vim.o.termguicolors = true
 
 vim.o.background = 'dark'
@@ -165,7 +165,7 @@ require'lualine'.setup {
 }
 
 -- Tabline Config
-require("bufferline").setup{
+require('bufferline').setup{
 	options = {
 		tab_size = 15,
 		show_buffer_close_icons = false,
@@ -228,7 +228,7 @@ require('specs').setup{
 		inc_ms = 20, -- time increments used for fade/resize effects
 		blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
 		width = 20,
-		winhl = "PMenu",
+		winhl = 'PMenu',
 		fader = require('specs').pulse_fader,
 		resizer = require('specs').shrink_resizer
 	},
@@ -238,8 +238,8 @@ require('specs').setup{
 	},
 }
 
---Fucus
-require("focus").setup()
+--Focus
+require('focus').setup()
 vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true })
 
 
@@ -250,12 +250,12 @@ require('distant').setup{
 }
 
 --ToggleTerm
-require("toggleterm").setup{
+require('toggleterm').setup{
   -- size can be a number or function which is passed the current terminal
 --[[   size = 20 | function(term)
-    if term.direction == "horizontal" then
+    if term.direction == 'horizontal' then
       return 15
-    elseif term.direction == "vertical" then
+    elseif term.direction == 'vertical' then
       return vim.o.columns * 0.4
     end
   end, ]]
@@ -281,8 +281,8 @@ require("toggleterm").setup{
     height = <value>, ]]
     winblend = 3,
     highlights = {
-      border = "Normal",
-      background = "Normal",
+      border = 'Normal',
+      background = 'Normal',
     }
   }
 }
@@ -299,13 +299,13 @@ require('telescope').setup{
 			'--column',
 			'--smart-case'
 		},
-		prompt_prefix = "> ",
-		selection_caret = "> ",
-		entry_prefix = "  ",
-		initial_mode = "insert",
-		selection_strategy = "reset",
-		sorting_strategy = "descending",
-		layout_strategy = "horizontal",
+		prompt_prefix = '> ',
+		selection_caret = '> ',
+		entry_prefix = '  ',
+		initial_mode = 'insert',
+		selection_strategy = 'reset',
+		sorting_strategy = 'descending',
+		layout_strategy = 'horizontal',
 		layout_config = {
 			horizontal = {
 				mirror = false,
@@ -340,7 +340,7 @@ vim.api.nvim_set_keymap('n', '<leader>gg', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>//', ':Telescope<CR>', { noremap = true, silent = true })
 
 --Compe
-vim.o.completeopt = "menuone,noselect"
+vim.o.completeopt = 'menuone,noselect'
 require'compe'.setup {
 	enabled = true;
 	autocomplete = true;
@@ -356,7 +356,7 @@ require'compe'.setup {
 	max_menu_width = 100;
 	documentation = {
 		border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-		winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+		winhighlight = 'NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder',
 		max_width = 120,
 		min_width = 60,
 		max_height = math.floor(vim.o.lines * 0.3),
@@ -415,7 +415,7 @@ require'lspconfig'.jsonls.setup{
 	init_options = {
 		provideFormatter = true
 	},
---	cmd = { "vscode-json-languageserver", "--stdio" }
+--	cmd = { 'vscode-json-languageserver', '--stdio' }
 }
 
 require'lspconfig'.pyright.setup{}
@@ -424,7 +424,7 @@ require'lspconfig'.sumneko_lua.setup{}
 
 --Treesitter
 require'nvim-treesitter.configs'.setup {
-	ensure_installed = { "c", "python", "lua", "rust", "http", "html", "json", "css", "scss", "c_sharp", "javascript" },
+	ensure_installed = { 'c', 'python', 'lua', 'rust', 'http', 'html', 'json', 'css', 'scss', 'c_sharp', 'javascript' },
 	highlight = {
 		enable = true,
 	},
