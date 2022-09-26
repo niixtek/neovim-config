@@ -39,6 +39,7 @@ require('packer').startup(function()
 	use  'NTBBloodbath/rest.nvim'
 	use 'm4xshen/autoclose.nvim'
 	use 'beauwilliams/focus.nvim'
+	use 'phaazon/hop.nvim'
 	-- Git Command
 	use 'tpope/vim-fugitive'
 	use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
@@ -121,8 +122,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Icons
-require'nvim-web-devicons'.has_loaded()
-require'nvim-web-devicons'.get_icons()
+require('nvim-web-devicons').has_loaded()
+require('nvim-web-devicons').get_icons()
 
 -- Theme
 vim.wo.t_Co = '256'
@@ -132,10 +133,10 @@ vim.o.background = 'dark'
 vim.cmd('colorscheme base16-outrun-dark')
 
 -- Colorizer
-require'colorizer'.setup()
+require('colorizer').setup()
 
 -- Status Bar
-require'lualine'.setup {
+require('lualine').setup {
 	options = {
 		icons_enabled = true,
 		theme = 'auto',
@@ -242,6 +243,8 @@ require('specs').setup{
 require('focus').setup()
 vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true })
 
+--Hop
+require('hop').setup { keys = 'etovxqpdygfblzhckisuran' }
 
 --Distant
 local actions = require('distant.nav.actions')
@@ -314,9 +317,9 @@ require('telescope').setup{
 				mirror = false,
 			},
 		},
-		file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+		file_sorter =  require('telescope.sorters').get_fuzzy_file,
 		file_ignore_patterns = {},
-		generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+		generic_sorter =  require('telescope.sorters').get_generic_fuzzy_sorter,
 		winblend = 0,
 		border = {},
 		borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
@@ -324,12 +327,12 @@ require('telescope').setup{
 		use_less = true,
 		path_display = {},
 		set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
-		file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-		grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-		qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+		file_previewer = require('telescope.previewers').vim_buffer_cat.new,
+		grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
+		qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 
 		-- Developer configurations: Not meant for general override
-		buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+		buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker
 	}
 }
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
@@ -341,7 +344,7 @@ vim.api.nvim_set_keymap('n', '<leader>//', ':Telescope<CR>', { noremap = true, s
 
 --Compe
 vim.o.completeopt = 'menuone,noselect'
-require'compe'.setup {
+require('compe').setup {
 	enabled = true;
 	autocomplete = true;
 	debug = false;
@@ -398,7 +401,7 @@ vim.g.user_emmet_leader_key = ','
 --Lsp
 vim.api.nvim_set_keymap('n', '<leader>f', '[[<cmd>lua vim.lsp.buf.formatting()<CR>]]', { silent = true })
 
-require'lspconfig'.volar.setup{
+require('lspconfig').volar.setup{
   filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
 	init_options = {
 		typescript = {
@@ -407,23 +410,23 @@ require'lspconfig'.volar.setup{
 	}
 }
 
-require'lspconfig'.html.setup{}
+require('lspconfig').html.setup{}
 
-require'lspconfig'.csharp_ls.setup{}
+require('lspconfig').csharp_ls.setup{}
 
-require'lspconfig'.jsonls.setup{
+require('lspconfig').jsonls.setup{
 	init_options = {
 		provideFormatter = true
 	},
 --	cmd = { 'vscode-json-languageserver', '--stdio' }
 }
 
-require'lspconfig'.pyright.setup{}
+require('lspconfig').pyright.setup{}
 
-require'lspconfig'.sumneko_lua.setup{}
+require('lspconfig').sumneko_lua.setup{}
 
 --Treesitter
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
 	ensure_installed = { 'c', 'python', 'lua', 'rust', 'http', 'html', 'json', 'css', 'scss', 'c_sharp', 'javascript' },
 	highlight = {
 		enable = true,
