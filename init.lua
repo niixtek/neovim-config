@@ -37,8 +37,8 @@ require('packer').startup(function()
 	use 'kyazdani42/nvim-tree.lua'
 	use {'akinsho/toggleterm.nvim', tag = 'v1.*'}
 	use 'natecraddock/workspaces.nvim' 
+	use 'natecraddock/sessions.nvim'
 	use  'NTBBloodbath/rest.nvim'
-	use 'm4xshen/autoclose.nvim'
 	use 'beauwilliams/focus.nvim'
 	use 'phaazon/hop.nvim'
 	-- Git Command
@@ -132,7 +132,7 @@ vim.wo.t_Co = '256'
 vim.o.termguicolors = true
 
 vim.o.background = 'dark'
-vim.cmd('colorscheme 2077')
+vim.cmd('colorscheme base16-outrun-dark')
 
 -- Colorizer
 require('colorizer').setup()
@@ -245,7 +245,18 @@ require('specs').setup{
 }
 
 -- Workspace 
-require("workspaces").setup()
+require("workspaces").setup({
+	hooks = {
+		open = { "NvimTreeOpen"},
+	}
+})
+
+--Session
+require("sessions").setup({
+	hooks = {
+		open = { "NvimTreeOpen"},
+	}
+})
 
 --Focus
 require('focus').setup()
@@ -260,12 +271,12 @@ vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction =
 
 --Distant
 local actions = require('distant.nav.actions')
-require('distant').setup{
+require('distant').setup({
 	['*'] = require('distant.settings').chip_default(),
-}
+})
 
 --ToggleTerm
-require('toggleterm').setup{
+require('toggleterm').setup({
   -- size can be a number or function which is passed the current terminal
 --[[   size = 20 | function(term)
     if term.direction == 'horizontal' then
@@ -300,10 +311,10 @@ require('toggleterm').setup{
       background = 'Normal',
     }
   }
-}
+})
 
 -- TeleScope
-require('telescope').setup{
+require('telescope').setup({
 	defaults = {
 		vimgrep_arguments = {
 			'rg',
@@ -346,7 +357,7 @@ require('telescope').setup{
 		-- Developer configurations: Not meant for general override
 		buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker
 	}
-}
+})
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>lg', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true, silent = true})
@@ -356,7 +367,7 @@ vim.api.nvim_set_keymap('n', '<leader>//', ':Telescope<CR>', { noremap = true, s
 
 --Compe
 vim.o.completeopt = 'menuone,noselect'
-require('compe').setup {
+require('compe').setup({
 	enabled = true;
 	autocomplete = true;
 	debug = false;
@@ -387,10 +398,10 @@ require('compe').setup {
 		ultisnips = true;
 		luasnip = true;
 	};
-}
+})
 
 -- Gitsigns
-require('gitsigns').setup {
+require('gitsigns').setup({
 	signs = {
 		add = { hl = 'GitGutterAdd', text = '+' },
 		change = { hl = 'GitGutterChange', text = '~' },
@@ -398,7 +409,7 @@ require('gitsigns').setup {
 		topdelete = { hl = 'GitGutterDelete', text = '‾' },
 		changedelete = { hl = 'GitGutterChange', text = '~' },
 	},
-}
+})
 
 --Rest Tool
 require('rest-nvim').setup({
@@ -413,29 +424,29 @@ vim.g.user_emmet_leader_key = ','
 --Lsp
 vim.api.nvim_set_keymap('n', '<leader>f', '[[<cmd>lua vim.lsp.buf.formatting()<CR>]]', { silent = true })
 
-require('lspconfig').volar.setup{
+require('lspconfig').volar.setup({
   filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
 	init_options = {
 		typescript = {
       serverPath = '/home/ron/node_modules/typescript/lib/tsserverlibrary.js'
     }
 	}
-}
+})
 
-require('lspconfig').html.setup{}
+require('lspconfig').html.setup({})
 
-require('lspconfig').csharp_ls.setup{}
+require('lspconfig').csharp_ls.setup({})
 
-require('lspconfig').jsonls.setup{
+require('lspconfig').jsonls.setup({
 	init_options = {
 		provideFormatter = true
 	},
 --	cmd = { 'vscode-json-languageserver', '--stdio' }
-}
+})
 
-require('lspconfig').pyright.setup{}
+require('lspconfig').pyright.setup({})
 
-require('lspconfig').sumneko_lua.setup{}
+require('lspconfig').sumneko_lua.setup({})
 
 --Treesitter
 require('nvim-treesitter.configs').setup {
