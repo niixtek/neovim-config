@@ -67,6 +67,7 @@ require('packer').startup(function()
 	-- remote
 	use 'chipsenkbeil/distant.nvim'
 	-- Themes;
+	use 'rose-pine/neovim'
 	use 'averak/laserwave.vim'
 	use 'chriskempson/base16-vim'
 	use 'akai54/2077.nvim'
@@ -122,7 +123,7 @@ require('indent_blankline').setup {
 require('nvim-cursorline').setup {
   cursorline = {
     enable = true,
-    timeout = 500,
+    timeout = 0,
     number = false,
   },
   cursorword = {
@@ -149,7 +150,8 @@ vim.wo.t_Co = '256'
 vim.o.termguicolors = true
 
 vim.o.background = 'dark'
-vim.cmd('colorscheme base16-outrun-dark')
+--vim.cmd('colorscheme base16-outrun-dark')
+vim.cmd('colorscheme rose-pine')
 
 -- Colorizer
 require('colorizer').setup()
@@ -265,7 +267,7 @@ require('specs').setup{
 -- Workspace 
 require('workspaces').setup({
 	hooks = {
-		open = { 'Telescope file_browser' },
+		open = { 'Telescope find_files' },
 	}
 })
 
@@ -330,7 +332,7 @@ require('telescope').setup({
 			'node_modules',
 			'__pycache__' 
 		},
-		initial_mode = "normal",
+		initial_mode = 'normal',
 		set_env = { ['COLORTERM'] = 'truecolor' },
 		
 		extensions = {
