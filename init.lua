@@ -29,7 +29,7 @@ require('packer').startup(function()
 	use 'nvim-telescope/telescope-file-browser.nvim'
 	use 'nvim-telescope/telescope-project.nvim'
 	use 'nvim-telescope/telescope-media-files.nvim'
-	use {'akinsho/bufferline.nvim', tag = 'v2.*'} -- Buffer Tab
+	use 'noib3/nvim-cokeline'
 	use 'lukas-reineke/indent-blankline.nvim' -- Indent Line
 	use 'karb94/neoscroll.nvim' -- SmoothScroll
 	use 'dstein64/nvim-scrollview' --Scrollbar
@@ -42,7 +42,7 @@ require('packer').startup(function()
 	use {'akinsho/toggleterm.nvim', tag = 'v1.*'}
 	use 'natecraddock/workspaces.nvim' 
 	use 'natecraddock/sessions.nvim'
-	use  'NTBBloodbath/rest.nvim'
+	use 'NTBBloodbath/rest.nvim'
 	use 'beauwilliams/focus.nvim'
 	use 'phaazon/hop.nvim'
 	-- Git Command
@@ -166,22 +166,27 @@ require('lualine').setup {
 	},
 }
 
--- Tabline Config
-require('bufferline').setup{
-	options = {
-		tab_size = 15,
-		show_buffer_close_icons = false,
-		separator_style = 'slant',
-		show_tab_indicators = true
+--CokeLine
+require('cokeline').setup({
+	buffers = {
+	},
+	components = {
+		{
+			text = function(buffer) return ' ' .. buffer.devicon.icon end,
+			fg = function(buffer) return buffer.devicon.color end,
+		}, 
+		{
+			text = function(buffer) return buffer.is_modified and '!' or '' end,
+			fg = function(buffer) return 'red' end,
+		},
+    {
+      text = function(buffer) return  buffer.filename .. ' ' end,
+    },
 	}
-}
-vim.api.nvim_set_keymap('n', '<A-.>', ':BufferLineCycleNext<CR>', { silent = true })
-vim.api.nvim_set_keymap('n', '<A-,>', ':BufferLineCyclePrev<CR>', { silent = true })
-vim.api.nvim_set_keymap('n', '<A-c>', ':BufferClose<CR>', { silent = true })
-vim.api.nvim_set_keymap('n', '<A-s>', ':BufferLinePick<CR>', { silent = true })
-vim.api.nvim_set_keymap('n', '<A->>', ':BufferLineMoveNext<CR>', { silent = true })
-vim.api.nvim_set_keymap('n', '<A-<>', ':BufferLineMovePrev<CR>', { silent = true })
-vim.api.nvim_set_keymap('n', '<A-w>', ':bdelete<CR>', { silent = true })
+})
+vim.api.nvim_set_keymap('n', '<A-.>', [[<cmd>lua require'cokeline/mappings'.by_step('focus', -1)<CR>]], { silent = true })
+vim.api.nvim_set_keymap('n', '<A-,>', [[<cmd>lua require'cokeline/mappings'.by_step('focus', 1)<CR>]], { silent = true })
+vim.api.nvim_set_keymap('n', '<A-w>', [[<cmd>lua require'cokeline/mappings'.pick('close')<CR>]], { silent = true })
 
 --File Browser
 require('nvim-tree').setup {
@@ -276,14 +281,6 @@ require('distant').setup({
 
 --ToggleTerm
 require('toggleterm').setup({
-  -- size can be a number or function which is passed the current terminal
---[[   size = 20 | function(term)
-    if term.direction == 'horizontal' then
-      return 15
-    elseif term.direction == 'vertical' then
-      return vim.o.columns * 0.4
-    end
-  end, ]]
   open_mapping = [[<c-\>]],
   hide_numbers = true, -- hide the number column in toggleterm buffers
   shade_filetypes = {},
@@ -319,6 +316,9 @@ require('telescope').setup({
 			'node_modules',
 			'__pycache__' 
 		},
+		initial_mode = "normal",
+		set_env = { ['COLORTERM'] = 'truecolor' },
+		
 		extensions = {
 			workspaces = {
 				keep_insert = true,
@@ -327,22 +327,25 @@ require('telescope').setup({
 				filetypes = {'png', 'webp', 'jpg', 'jpeg'},
 				find_cmd = 'rg'
 			},
+			file_browser = {
+				theme = 'ivy'
+			},
 		},
 	}
 })
 --load Telescope plugins
-require("telescope").load_extension "file_browser"
-require'telescope'.load_extension('workspaces')
-require'telescope'.load_extension('project')
+require('telescope').load_extension('file_browser')
+require('telescope').load_extension('workspaces')
+require('telescope').load_extension('project')
 require('telescope').load_extension('media_files')
 
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>lg', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>gg', [[<cmd>lua require('telescope.builtin').git_status()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>pp', [[<cmd>lua require'telescope'.extensions.project.project{}<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>ww', [[<cmd>lua require'telescope'.extensions.workspaces.workspaces{}<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require'telescope'.extensions.file_browser.file_browser{}<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>pp', [[<cmd>lua require'telescope'.extensions.project.project()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ww', [[<cmd>lua require'telescope'.extensions.workspaces.workspaces()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>//', ':Telescope<CR>', { noremap = true, silent = true })
 
 --Compe
