@@ -45,6 +45,7 @@ require('packer').startup(function()
 	use 'NTBBloodbath/rest.nvim'
 	use 'beauwilliams/focus.nvim'
 	use 'phaazon/hop.nvim'
+	use 'sunjon/shade.nvim'
 	-- Git Command
 	use 'tpope/vim-fugitive'
 	use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
@@ -288,6 +289,10 @@ require('sessions').setup({
 --Focus
 require('focus').setup()
 vim.api.nvim_set_keymap('n', '<c-l>', ':FocusSplitNicely<CR>', { silent = true })
+
+require'shade'.setup({
+  overlay_opacity = 50,
+})
 
 --Hop
 require('hop').setup { keys = 'etovxqpdygfblzhckisuran' }
