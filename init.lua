@@ -28,6 +28,7 @@ require('packer').startup(function()
 	use 'nvim-telescope/telescope.nvim'
 	use 'nvim-telescope/telescope-file-browser.nvim'
 	use 'nvim-telescope/telescope-project.nvim'
+	use 'xiyaowong/telescope-emoji.nvim'
 	use 'nvim-telescope/telescope-media-files.nvim'
 	use 'noib3/nvim-cokeline'
 	use 'lukas-reineke/indent-blankline.nvim' -- Indent Line
@@ -50,6 +51,7 @@ require('packer').startup(function()
 	use 'tpope/vim-fugitive'
 	use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
 	use 'lewis6991/gitsigns.nvim'
+	use 'kdheepak/lazygit.nvim'
 	use 'windwp/nvim-spectre' -- Search Tool
 	use 'gennaro-tedesco/nvim-commaround' -- Comment
 	use 'nvim-lua/plenary.nvim'
@@ -359,6 +361,7 @@ require('telescope').load_extension('file_browser')
 require('telescope').load_extension('workspaces')
 require('telescope').load_extension('project')
 require('telescope').load_extension('media_files')
+require('telescope').load_extension('emoji')
 
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>lg', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
