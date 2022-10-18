@@ -324,7 +324,7 @@ require('toggleterm').setup({
   shell = vim.o.shell,
   float_opts = {
     border =  'curved',
-    winblend = 3,
+    winblend = 0,
     highlights = {
       border = 'Normal',
       background = 'Normal',
@@ -370,6 +370,7 @@ vim.api.nvim_set_keymap('n', '<leader>gd', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>pp', [[<cmd>lua require'telescope'.extensions.project.project()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ww', [[<cmd>lua require'telescope'.extensions.workspaces.workspaces()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ge', [[<cmd>lua require'telescope'.extensions.emoji.emoji()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>//', ':Telescope<CR>', { noremap = true, silent = true })
 
 --Compe
