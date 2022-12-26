@@ -47,6 +47,7 @@ require('packer').startup(function()
 	use 'beauwilliams/focus.nvim'
 	use 'phaazon/hop.nvim'
 	use 'sunjon/shade.nvim'
+	use 'ellisonleao/glow.nvim'
 	-- Git Command
 	use 'tpope/vim-fugitive'
 	use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
@@ -56,6 +57,7 @@ require('packer').startup(function()
 	use 'gennaro-tedesco/nvim-commaround' -- Comment
 	use 'nvim-lua/plenary.nvim'
 	use 'nvim-lua/popup.nvim'
+	use 'gorbit99/codewindow.nvim'
 	--Syntax
 	use 'Joorem/vim-haproxy'
 	use 'jidn/vim-dbml'
@@ -74,6 +76,7 @@ require('packer').startup(function()
 	use 'averak/laserwave.vim'
 	use 'chriskempson/base16-vim'
 	use 'akai54/2077.nvim'
+	use 'catppuccin/nvim'
 end)
 
 -- Vim Options
@@ -149,12 +152,11 @@ require('nvim-web-devicons').has_loaded()
 require('nvim-web-devicons').get_icons()
 
 -- Theme
-vim.wo.t_Co = '256'
 vim.o.termguicolors = true
 
 vim.o.background = 'dark'
 --vim.cmd('colorscheme base16-outrun-dark')
-vim.cmd('colorscheme rose-pine')
+vim.cmd('colorscheme catppuccin')
 
 -- Colorizer
 require('colorizer').setup()
@@ -213,6 +215,10 @@ require('cokeline').setup({
 vim.api.nvim_set_keymap('n', '<A-.>', [[<cmd>lua require'cokeline/mappings'.by_step('focus', -1)<CR>]], { silent = true })
 vim.api.nvim_set_keymap('n', '<A-,>', [[<cmd>lua require'cokeline/mappings'.by_step('focus', 1)<CR>]], { silent = true })
 vim.api.nvim_set_keymap('n', '<A-w>', [[<cmd>lua require'cokeline/mappings'.pick('close')<CR>]], { silent = true })
+
+--CodeWindow
+require('codewindow').setup({
+})
 
 --File Browser
 require('nvim-tree').setup {
@@ -430,7 +436,7 @@ vim.api.nvim_set_keymap('n', '<leader>rr', [[<cmd>lua require('rest-nvim').run()
 
 -- Emmet
 vim.g.user_emmet_mode = 'i'
-vim.g.user_emmet_leader_key = ','
+--vim.g.user_emmet_leader_key = ','
 
 --Lsp
 vim.api.nvim_set_keymap('n', '<leader>f', '[[<cmd>lua vim.lsp.buf.formatting()<CR>]]', { silent = true })
