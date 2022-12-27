@@ -61,6 +61,7 @@ require('packer').startup(function()
 	--Syntax
 	use 'Joorem/vim-haproxy'
 	use 'jidn/vim-dbml'
+	use 'chrisbra/csv.vim'
 	-- Icons
 	use 'kyazdani42/nvim-web-devicons'
 	-- Status bar
@@ -179,42 +180,6 @@ require('lualine').setup {
 		lualine_c = {{'filename', path = 3 }},
 	}
 }
-
---CokeLine
-local get_hex = require('cokeline/utils').get_hex
-local yellow = vim.g.terminal_color_3
-
-require('cokeline').setup({
-	buffers = {
-	},
-	sidebar = {
-		filetype = 'NvimTree',
-		components = {
-			{
-				text = '  NvimTree',
-				fg = yellow,
-				bg = get_hex('NvimTreeNormal', 'bg'),
-				style = 'bold',
-			},
-		},
-	},
-	components = {
-		{
-			text = function(buffer) return ' ' .. buffer.devicon.icon end,
-			fg = function(buffer) return buffer.devicon.color end,
-		}, 
-		{
-			text = function(buffer) return buffer.is_modified and '!' or '' end,
-			fg = function(buffer) return 'red' end,
-		},
-    {
-      text = function(buffer) return  buffer.filename .. ' ' end,
-    },
-	}
-})
-vim.api.nvim_set_keymap('n', '<A-.>', [[<cmd>lua require'cokeline/mappings'.by_step('focus', -1)<CR>]], { silent = true })
-vim.api.nvim_set_keymap('n', '<A-,>', [[<cmd>lua require'cokeline/mappings'.by_step('focus', 1)<CR>]], { silent = true })
-vim.api.nvim_set_keymap('n', '<A-w>', [[<cmd>lua require'cokeline/mappings'.pick('close')<CR>]], { silent = true })
 
 --CodeWindow
 require('codewindow').setup({
