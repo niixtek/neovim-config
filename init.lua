@@ -148,6 +148,9 @@ vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+--disable ^C-c
+vim.api.nvim_set_keymap('', '<C-c>', '<Nop>', { noremap = true, silent = true })
+
 -- Icons
 require('nvim-web-devicons').has_loaded()
 require('nvim-web-devicons').get_icons()
