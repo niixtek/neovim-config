@@ -1,6 +1,4 @@
--- packer Installer command from https://github.com/mjlbach/defaults.nvim/blob/master/init.lua
---
--- Install packer
+-- Install Packer #https://github.com/mjlbach/defaults.nvim/blob/master/init.lua
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -78,7 +76,11 @@ require('packer').startup(function()
 	use 'chriskempson/base16-vim'
 	use 'akai54/2077.nvim'
 	use 'catppuccin/nvim'
+	use 'shaunsingh/nord.nvim'
+
 end)
+
+require('colorscheme')
 
 -- Vim Options
 vim.o.encoding = 'utf-8'
@@ -160,7 +162,7 @@ vim.o.termguicolors = true
 
 vim.o.background = 'dark'
 --vim.cmd('colorscheme base16-outrun-dark')
-vim.cmd('colorscheme catppuccin')
+--vim.cmd('colorscheme nord')
 
 -- Colorizer
 require('colorizer').setup()
