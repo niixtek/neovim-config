@@ -11,5 +11,3 @@ require('plugins/navigation')
 require('plugins/tabbar')
 require('plugins/terminal')
 require('plugins/utils')
-
-
