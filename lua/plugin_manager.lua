@@ -34,8 +34,7 @@ return require('packer').startup(function(use)
 	use 'lukas-reineke/indent-blankline.nvim' -- Indent Line
 
 	use 'karb94/neoscroll.nvim' -- SmoothScroll
-	use 'dstein64/nvim-scrollview' --Scrollbar
-	use('petertriho/nvim-scrollbar') Scrollbar
+	use 'petertriho/nvim-scrollbar' --Scrollbar
 	use 'yamatsum/nvim-cursorline'
 
 	use 'edluffy/specs.nvim' -- Show Cursor when jumping
