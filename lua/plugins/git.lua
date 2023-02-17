@@ -1,6 +1,3 @@
---LazyGit
-vim.api.nvim_set_keymap('n', '<leader>gg', ':LazyGit<CR>', { noremap = true, silent = true })
-
 -- Gitsigns
 require('gitsigns').setup({
 	signs = {
