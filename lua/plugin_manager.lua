@@ -13,7 +13,6 @@ vim.api.nvim_exec(
 ]],
 false)
 
---local use = require('packer').use
 return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim' -- Package manager
 	--dependencies
@@ -44,22 +43,20 @@ return require('packer').startup(function(use)
 
 	use 'mattn/emmet-vim' -- Emmet
 
-	--use 'mhartington/formatter.nvim' -- Formatter
+	--use 'kyazdani42/nvim-tree.lua'
 
-	use 'kyazdani42/nvim-tree.lua'
-
-	use {'akinsho/toggleterm.nvim', tag = 'v1.*'}
+	use {'akinsho/toggleterm.nvim', tag = '*'}
 
 	use 'natecraddock/workspaces.nvim' 
 	use 'natecraddock/sessions.nvim'
 
-	use 'NTBBloodbath/rest.nvim'
 	use 'beauwilliams/focus.nvim'
 	use 'sunjon/shade.nvim' --dim inavtive window
 
 	use 'phaazon/hop.nvim'
 	use 'ellisonleao/glow.nvim'
 
+		--git
 	use 'lewis6991/gitsigns.nvim'
 	use 'kdheepak/lazygit.nvim'
 
@@ -67,27 +64,20 @@ return require('packer').startup(function(use)
 
 	use 'gennaro-tedesco/nvim-commaround' -- Comment
 
-
-
 	use 'gorbit99/codewindow.nvim'
 
-	--Syntax
-	--use 'Joorem/vim-haproxy'
-	--use 'jidn/vim-dbml'
-	--use 'chrisbra/csv.vim'
-	-- Icons
-	-- Status bar
-	use 'nvim-lualine/lualine.nvim'
+	use 'nvim-lualine/lualine.nvim' -- Status bar
 	
 	use 'hrsh7th/nvim-compe' -- Autocompletion plugin
 
 	use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
 	use 'p00f/nvim-ts-rainbow' -- Raintbow Parentheses
-
 	use 'norcalli/nvim-colorizer.lua' --Color Code Hilight
-	-- remote
-	use 'chipsenkbeil/distant.nvim'
+
+	use 'chipsenkbeil/distant.nvim'  --remote
+
+	use 'NTBBloodbath/rest.nvim' --rest api tool
 	-- Themes;
 	use 'rose-pine/neovim'
 	use 'averak/laserwave.vim'
