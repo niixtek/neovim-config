@@ -1,0 +1,2 @@
+
+lua require('synthwave').setcolor()

@@ -1,6 +1,7 @@
 require('plugin_manager')
 require('settings')
 require('colorscheme')
+require('keymaps')
 require('plugins/git')
 require('plugins/indent')
 require('plugins/lsp')
