@@ -13,11 +13,4 @@ require('codewindow').setup({
 require('neoscroll').setup()
 
 -- Scrollbar
-require('scrollview').setup({
-  excluded_filetypes = {'nerdtree'},
-  current_only = true,
-  winblend = 75,
-  base = 'buffer',
-  column = 80
-})
-
+require('scrollbar').setup()
