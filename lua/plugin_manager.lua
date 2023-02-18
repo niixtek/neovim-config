@@ -19,6 +19,7 @@ return require('packer').startup(function(use)
 	use 'nvim-lua/plenary.nvim'
 	use 'nvim-lua/popup.nvim'
 	use 'kyazdani42/nvim-web-devicons'
+	use { 'm00qek/baleia.nvim', tag = 'v1.2.0' } --color ascii escape string
 
 	--LSP
 	use 'neovim/nvim-lspconfig'
@@ -54,7 +55,7 @@ return require('packer').startup(function(use)
 	use 'sunjon/shade.nvim' --dim inavtive window
 
 	use 'phaazon/hop.nvim'
-	use 'ellisonleao/glow.nvim'
+	use 'ellisonleao/glow.nvim' -- markdown preview
 
 		--git
 	use 'lewis6991/gitsigns.nvim'
@@ -72,12 +73,15 @@ return require('packer').startup(function(use)
 
 	use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
+	use 'yaocccc/nvim-hlchunk' -- {} hilight
 	use 'p00f/nvim-ts-rainbow' -- Raintbow Parentheses
 	use 'norcalli/nvim-colorizer.lua' --Color Code Hilight
 
 	use 'chipsenkbeil/distant.nvim'  --remote
 
 	use 'NTBBloodbath/rest.nvim' --rest api tool
+
+	use 'samodostal/image.nvim'
 	-- Themes;
 	use 'rose-pine/neovim'
 	use 'averak/laserwave.vim'

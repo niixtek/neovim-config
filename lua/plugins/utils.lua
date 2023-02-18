@@ -14,3 +14,15 @@ require('rest-nvim').setup({
 
 -- Emmet
 vim.g.user_emmet_mode = 'i'
+
+require('image').setup({
+	render = {
+		foreground_color = true,
+    background_color = true
+	}
+})
+
+-- Markdown Preview
+require('glow').setup({
+  -- your override config
+})
