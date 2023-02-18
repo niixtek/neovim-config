@@ -25,63 +25,52 @@ return require('packer').startup(function(use)
 	use 'neovim/nvim-lspconfig'
 	use 'williamboman/nvim-lsp-installer'
 	use 'nvim-treesitter/nvim-treesitter'
-
+	
+	-- Telescope
 	use 'nvim-telescope/telescope.nvim'
 	use 'nvim-telescope/telescope-file-browser.nvim'
 	use 'nvim-telescope/telescope-project.nvim'
 	use 'xiyaowong/telescope-emoji.nvim'
 	use 'nvim-telescope/telescope-media-files.nvim'
 
-	use 'lukas-reineke/indent-blankline.nvim' -- Indent Line
-
-	use 'karb94/neoscroll.nvim' -- SmoothScroll
-	use 'petertriho/nvim-scrollbar' --Scrollbar
-	use 'yamatsum/nvim-cursorline'
-
-	use 'edluffy/specs.nvim' -- Show Cursor when jumping
-
-	use 'ysl2/nvim-reload' -- Reload Lua Plugins
-
-	use 'mattn/emmet-vim' -- Emmet
-
-	--use 'kyazdani42/nvim-tree.lua'
-
-	use {'akinsho/toggleterm.nvim', tag = '*'}
-
+	--Workflow
 	use 'natecraddock/workspaces.nvim' 
 	use 'natecraddock/sessions.nvim'
+	use 'hrsh7th/nvim-compe' -- Autocompletion plugin
+	use 'L3MON4D3/LuaSnip' -- Snippets plugin
+	use 'yaocccc/nvim-hlchunk' -- {} hilight
+	use 'p00f/nvim-ts-rainbow' -- Raintbow Parentheses
+	use 'gennaro-tedesco/nvim-commaround' -- Comment
+	use 'norcalli/nvim-colorizer.lua' -- Color Code Hilight
+	use 'phaazon/hop.nvim' -- Jump!
+	use 'lukas-reineke/indent-blankline.nvim' -- Indent Line
+	use 'mattn/emmet-vim' -- Emmet
 
+	--windows
 	use 'beauwilliams/focus.nvim'
-	use 'sunjon/shade.nvim' --dim inavtive window
+	use 'sunjon/shade.nvim' --dim inacvtive window
+	use 'petertriho/nvim-scrollbar' --Scrollbar
+	use 'yamatsum/nvim-cursorline'
+	use 'windwp/nvim-spectre' -- Search Tool
+	use 'edluffy/specs.nvim' -- Show Cursor when jumping
+	use 'karb94/neoscroll.nvim' -- SmoothScroll
+	use 'gorbit99/codewindow.nvim'
 
-	use 'phaazon/hop.nvim'
-	use 'ellisonleao/glow.nvim' -- markdown preview
-
-		--git
+	--git
 	use 'lewis6991/gitsigns.nvim'
 	use 'kdheepak/lazygit.nvim'
 
-	use 'windwp/nvim-spectre' -- Search Tool
-
-	use 'gennaro-tedesco/nvim-commaround' -- Comment
-
-	use 'gorbit99/codewindow.nvim'
-
+	--Tabbar
 	use 'nvim-lualine/lualine.nvim' -- Status bar
-	
-	use 'hrsh7th/nvim-compe' -- Autocompletion plugin
 
-	use 'L3MON4D3/LuaSnip' -- Snippets plugin
-
-	use 'yaocccc/nvim-hlchunk' -- {} hilight
-	use 'p00f/nvim-ts-rainbow' -- Raintbow Parentheses
-	use 'norcalli/nvim-colorizer.lua' --Color Code Hilight
-
+	--Utilities
+	use {'akinsho/toggleterm.nvim', tag = '*'}
 	use 'chipsenkbeil/distant.nvim'  --remote
-
 	use 'NTBBloodbath/rest.nvim' --rest api tool
-
+	use 'ellisonleao/glow.nvim' -- markdown preview
+	use 'ysl2/nvim-reload' -- Reload Lua Plugins
 	use 'samodostal/image.nvim'
+
 	-- Themes;
 	use 'rose-pine/neovim'
 	use 'chriskempson/base16-vim'
