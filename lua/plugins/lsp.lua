@@ -24,7 +24,7 @@ require('lspconfig').pyright.setup({})
 
 --Treesitter
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { 'c', 'python', 'lua', 'rust', 'http', 'html', 'json', 'css', 'scss', 'c_sharp', 'javascript' },
+	ensure_installed = { 'c', 'python', 'lua', 'rust', 'http', 'html', 'json', 'css', 'scss', 'c_sharp', 'javascript', 'yaml' },
 	highlight = {
 		enable = true,
 	},
