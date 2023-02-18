@@ -13,4 +13,7 @@ require('codewindow').setup({
 require('neoscroll').setup()
 
 -- Scrollbar
-require('scrollbar').setup()
+--require('scrollbar').setup({
+--})
+----  Gitsigns support
+--require("scrollbar.handlers.gitsigns").setup()

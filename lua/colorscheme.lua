@@ -1,3 +1,3 @@
 vim.o.termguicolors = true
 vim.o.background = 'dark'
-vim.cmd('colorscheme cyberpunk')
+vim.cmd('colorscheme rose-pine')
