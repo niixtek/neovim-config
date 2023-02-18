@@ -40,7 +40,7 @@ return require('packer').startup(function(use)
 
 	use 'edluffy/specs.nvim' -- Show Cursor when jumping
 
-	use 'famiu/nvim-reload' -- Reload Lua Plugins
+	use 'ysl2/nvim-reload' -- Reload Lua Plugins
 
 	use 'mattn/emmet-vim' -- Emmet
 
@@ -84,10 +84,7 @@ return require('packer').startup(function(use)
 	use 'samodostal/image.nvim'
 	-- Themes;
 	use 'rose-pine/neovim'
-	use 'averak/laserwave.vim'
 	use 'chriskempson/base16-vim'
-	use 'akai54/2077.nvim'
 	use 'catppuccin/nvim'
-	use 'shaunsingh/nord.nvim'
 	use 'thedenisnikulin/vim-cyberpunk'
 end)
