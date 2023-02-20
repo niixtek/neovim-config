@@ -21,7 +21,7 @@ return require('packer').startup(function(use)
 	use 'kyazdani42/nvim-web-devicons'
 	use { 'm00qek/baleia.nvim', tag = 'v1.2.0' } --color ascii escape string
 
-	--LSP
+	--Syntax
 	use 'neovim/nvim-lspconfig'
 	use 'williamboman/nvim-lsp-installer'
 	use 'nvim-treesitter/nvim-treesitter'
